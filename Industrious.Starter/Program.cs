@@ -1,5 +1,7 @@
 ﻿using System.CommandLine;
+using System.Diagnostics;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace Industrious.Starter
 {
@@ -13,12 +15,9 @@ namespace Industrious.Starter
 
 		// All the steps to make an Industrious-worthy solution
 		private static readonly Action<Configuration>[] Versions = new Action<Configuration>[] {
-			CreateEditorConfig,
-			CreateGitAttributes,
-			CreateGitIgnore,
-			CreateLicense,
-			CreateReadme,
-			CreateSolution
+			CreateSupportFiles,
+			CreateSolution,
+			CreateMacOsProject
 		};
 
 		////////////////////////////////////////////////////////////////////////////////
@@ -79,58 +78,18 @@ namespace Industrious.Starter
 
 		////////////////////////////////////////////////////////////////////////////////
 		/// <summary>
-		///  Create an .editorconfig to apply my preferred settings.
+		///  Create the supporting configuration files required by all projects.
 		/// </summary>
 		////////////////////////////////////////////////////////////////////////////////
-		private static void CreateEditorConfig(Configuration _)
+		private static void CreateSupportFiles(Configuration cfg)
 		{
-			Console.WriteLine("Creating .editorconfig");
-			File.WriteAllText(".editorconfig", ReadResource("EditorConfig.txt"));
-		}
-
-		////////////////////////////////////////////////////////////////////////////////
-		/// <summary>
-		///  Create a .gitattributes file, with LFS entries for common binary types.
-		/// </summary>
-		////////////////////////////////////////////////////////////////////////////////
-		private static void CreateGitAttributes(Configuration _)
-		{
-			Console.WriteLine("Creating .gitattributes");
-			File.WriteAllText(".gitattributes", ReadResource("GitAttributes.txt"));
-		}
-
-		////////////////////////////////////////////////////////////////////////////////
-		/// <summary>
-		///  Create a .gitignore file, set up for .NET projects.
-		/// </summary>
-		////////////////////////////////////////////////////////////////////////////////
-		private static void CreateGitIgnore(Configuration _)
-		{
-			Console.WriteLine("Creating .gitignore");
-			File.WriteAllText(".gitignore", ReadResource("GitIgnore.txt"));
-		}
-
-		////////////////////////////////////////////////////////////////////////////////
-		/// <summary>
-		///  Add an MIT-style license.
-		/// </summary>
-		////////////////////////////////////////////////////////////////////////////////
-		private static void CreateLicense(Configuration _)
-		{
-			Console.WriteLine("Creating LICENSE.txt");
+			Console.WriteLine("Creating support files");
+			File.WriteAllText(".editorconfig", ReadResource(".editorconfig"));
+			File.WriteAllText(".gitattributes", ReadResource(".gitattributes"));
+			File.WriteAllText(".gitignore", ReadResource(".gitignore"));
 			File.WriteAllText("LICENSE.txt", ReadResource("LICENSE.txt")
 				.Replace("{DateTime.Now.Year}", DateTime.Now.Year.ToString())
 				.Replace("{CompanyName}", CompanyName));
-		}
-
-		////////////////////////////////////////////////////////////////////////////////
-		/// <summary>
-		///  Create a placeholder README.md
-		/// </summary>
-		////////////////////////////////////////////////////////////////////////////////
-		private static void CreateReadme(Configuration cfg)
-		{
-			Console.WriteLine("Creating README.md");
 			File.WriteAllText("README.md", ReadResource("README.md")
 				.Replace("{Name}", cfg.Name));
 		}
@@ -142,18 +101,95 @@ namespace Industrious.Starter
 		////////////////////////////////////////////////////////////////////////////////
 		private static void CreateSolution(Configuration cfg)
 		{
-			Console.WriteLine("Creating empty solution");
-			File.WriteAllText(cfg.Name + ".sln", ReadResource("Empty.sln"));
+			Console.WriteLine("Creating solution");
+			RunCommand("dotnet", $"new sln --name {cfg.Name} --force");
+
+			var contents = File.ReadAllText($"{cfg.Name}.sln");
+			contents = Regex.Replace(contents,
+				"^Global",
+				String.Join(
+					"\r\n",
+					"Project(\"{2150E333-8FDC-42A3-9474-1A3956D46DE8}\") = \"Support Files\", \"Support Files\", \"{6B0FD701-B9D2-44C1-BD08-C9E8AE7318DE}\"",
+					"\tProjectSection(SolutionItems) = preProject",
+					"\t\t.editorconfig = .editorconfig",
+					"\t\t.gitattributes = .gitattributes",
+					"\t\t.gitignore = .gitignore",
+					"\t\tLICENSE.txt = LICENSE.txt",
+					"\t\tREADME.md = README.md",
+					"\tEndProjectSection",
+					"EndProject",
+					"Global"),
+				RegexOptions.Multiline);
+
+			File.WriteAllText($"{cfg.Name}.sln", contents);
 		}
 
+		////////////////////////////////////////////////////////////////////////////////
+		/// <summary>
+		///  Create the macOS project and add it to the solution.
+		/// </summary>
+		////////////////////////////////////////////////////////////////////////////////
+		private static void CreateMacOsProject(Configuration cfg)
+		{
+			RunCommand("dotnet", $"new macos --output {cfg.Name}.macOS --force");
+			RunCommand("dotnet", $"sln add {cfg.Name}.macOS/{cfg.Name}.macOS.csproj");
+		}
 
+		////////////////////////////////////////////////////////////////////////////////
+		/// <summary>
+		///  Read text file embedded resource.
+		/// </summary>
+		/// <param name="resourceName">
+		///	 The name of a resource located in this assembly's `Resources` folder.
+		/// </param>
+		/// <returns>
+		///  The contents of the specified resource.
+		/// </returns>
+		/// <exception cref="InvalidProgramException">
+		///  The specified resource could not be found.
+		/// </exception>
+		////////////////////////////////////////////////////////////////////////////////
 		private static String ReadResource(String resourceName)
 		{
 			using var stream = Assembly
 				.GetExecutingAssembly()
-				.GetManifestResourceStream("Industrious.Starter.Resources." + resourceName)!;
+				.GetManifestResourceStream("Industrious.Starter.Resources." + resourceName);
+
+			if (stream == null)
+				throw new InvalidProgramException($"Missing resource '{resourceName}'");
+
 			using var reader = new StreamReader(stream);
 			return reader.ReadToEnd();
+		}
+
+		////////////////////////////////////////////////////////////////////////////////
+		/// <summary>
+		///  Run an external command.
+		/// </summary>
+		/// <remarks>
+		///  If the command succeeded, this method returns normally. If the command
+		///  fails, the contents of `stderr` are echoed to the console, the application
+		///  exits, returning the failed error code.
+		/// </remarks>
+		////////////////////////////////////////////////////////////////////////////////
+		private static void RunCommand(String program, String arguments)
+		{
+			var process = new Process();
+
+			process.StartInfo = new ProcessStartInfo() {
+				FileName = program,
+				Arguments = arguments,
+				RedirectStandardOutput = true,
+				RedirectStandardError = true
+			};
+
+			process.Start();
+			process.WaitForExit();
+
+			if (process.ExitCode == 0) return;
+
+			Console.WriteLine(process.StandardError.ReadToEnd());
+			Environment.Exit(process.ExitCode);
 		}
 	}
 }

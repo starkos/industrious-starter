@@ -12,17 +12,20 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Empty.sln" />
     <None Remove="Resources\editorconfig.txt" />
-    <EmbeddedResource Include="Resources\EditorConfig.txt" />
     <None Remove="Resources\GitAttributes.txt" />
-    <EmbeddedResource Include="Resources\GitAttributes.txt" />
     <None Remove="Resources\LICENSE.txt" />
     <EmbeddedResource Include="Resources\LICENSE.txt" />
     <None Remove="Resources\GitIgnore.txt" />
-    <EmbeddedResource Include="Resources\GitIgnore.txt" />
     <None Remove="Resources\README.md" />
     <EmbeddedResource Include="Resources\README.md" />
+    <None Remove="Resources\.editorconfig" />
+    <EmbeddedResource Include="Resources\.editorconfig" />
+    <None Remove="Resources\.gitattributes" />
+    <EmbeddedResource Include="Resources\.gitattributes" />
+    <None Remove="Resources\.gitignore" />
+    <EmbeddedResource Include="Resources\.gitignore" />
   </ItemGroup>
+
 
 </Project>
