@@ -1,4 +1,5 @@
 ﻿using System.CommandLine;
+using System.Reflection;
 
 namespace Industrious.Starter
 {
@@ -12,11 +13,12 @@ namespace Industrious.Starter
 
 		// All the steps to make an Industrious-worthy solution
 		private static readonly Action<Configuration>[] Versions = new Action<Configuration>[] {
-			Program.CreateEditorConfig,
-			Program.CreateGitAttributes,
-			Program.CreateGitIgnore,
-			Program.CreateLicense,
-			Program.CreateReadme
+			CreateEditorConfig,
+			CreateGitAttributes,
+			CreateGitIgnore,
+			CreateLicense,
+			CreateReadme,
+			CreateSolution
 		};
 
 		////////////////////////////////////////////////////////////////////////////////
@@ -83,31 +85,7 @@ namespace Industrious.Starter
 		private static void CreateEditorConfig(Configuration _)
 		{
 			Console.WriteLine("Creating .editorconfig");
-			File.WriteAllText(".editorconfig", String.Join(
-				Environment.NewLine,
-				"root = true",
-				"",
-				"[*]",
-				"charset = utf-8",
-				"end_of_line = lf",
-				"indent_size = 4",
-				"indent_style = tab",
-				"insert_final_newline = true",
-				"trim_trailing_whitespace = true",
-				"",
-				"[*.cs]",
-				"# imports",
-				"dotnet_sort_system_directives_first = true",
-				"dotnet_separate_import_directive_groups = true",
-				"",
-				"# indentation",
-				"csharp_indent_switch_labels = false",
-				"csharp_new_line_before_open_brace = methods, properties, control_blocks, types",
-				"",
-				"# framework type aliasing",
-				"dotnet_style_predefined_type_for_locals_parameters_members = false",
-				"dotnet_style_predefined_type_for_member_access = false",
-				""));
+			File.WriteAllText(".editorconfig", ReadResource("EditorConfig.txt"));
 		}
 
 		////////////////////////////////////////////////////////////////////////////////
@@ -118,17 +96,7 @@ namespace Industrious.Starter
 		private static void CreateGitAttributes(Configuration _)
 		{
 			Console.WriteLine("Creating .gitattributes");
-			File.WriteAllText(".gitattributes", String.Join(
-				Environment.NewLine,
-				"* text=auto",
-				"",
-				"# Visual Studio files",
-				"*.csproj  text eol=crlf",
-				"*.sln     text eol=crlf",
-				"",
-				"# Binary files",
-				"*.png filter=lfs diff=lfs merge=lfs -text",
-				""));
+			File.WriteAllText(".gitattributes", ReadResource("GitAttributes.txt"));
 		}
 
 		////////////////////////////////////////////////////////////////////////////////
@@ -139,15 +107,7 @@ namespace Industrious.Starter
 		private static void CreateGitIgnore(Configuration _)
 		{
 			Console.WriteLine("Creating .gitignore");
-			File.WriteAllText(".gitignore", String.Join(
-				Environment.NewLine,
-				"# Build files",
-				"[Bb]in/",
-				"[Oo]bj/",
-				"",
-				"# macOS files",
-				".DS_Store",
-				""));
+			File.WriteAllText(".gitignore", ReadResource("GitIgnore.txt"));
 		}
 
 		////////////////////////////////////////////////////////////////////////////////
@@ -158,27 +118,9 @@ namespace Industrious.Starter
 		private static void CreateLicense(Configuration _)
 		{
 			Console.WriteLine("Creating LICENSE.txt");
-			File.WriteAllText("LICENSE.txt", String.Join(
-				Environment.NewLine,
-				$"Copyright {DateTime.Now.Year} {CompanyName}",
-				"",
-				"Permission is hereby granted, free of charge, to any person obtaining a copy",
-				"of this software and associated documentation files (the \"Software\"), to deal",
-				"in the Software without restriction, including without limitation the rights",
-				"to use, copy, modify, merge, publish, distribute, sublicense, and/or sell",
-				"copies of the Software, and to permit persons to whom the Software is furnished",
-				"to do so, subject to the following conditions:",
-				"",
-				"The above copyright notice and this permission notice shall be included in all",
-				"copies or substantial portions of the Software.",
-				"",
-				"THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR",
-				"IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS",
-				"FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR",
-				"COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN",
-				"AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION",
-				"WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.",
-				""));
+			File.WriteAllText("LICENSE.txt", ReadResource("LICENSE.txt")
+				.Replace("{DateTime.Now.Year}", DateTime.Now.Year.ToString())
+				.Replace("{CompanyName}", CompanyName));
 		}
 
 		////////////////////////////////////////////////////////////////////////////////
@@ -189,10 +131,29 @@ namespace Industrious.Starter
 		private static void CreateReadme(Configuration cfg)
 		{
 			Console.WriteLine("Creating README.md");
-			File.WriteAllText("README.md", String.Join(
-				Environment.NewLine,
-				$"# {cfg.Name}",
-				""));
+			File.WriteAllText("README.md", ReadResource("README.md")
+				.Replace("{Name}", cfg.Name));
+		}
+
+		////////////////////////////////////////////////////////////////////////////////
+		/// <summary>
+		///  Create an empty Visual Studio solution.
+		/// </summary>
+		////////////////////////////////////////////////////////////////////////////////
+		private static void CreateSolution(Configuration cfg)
+		{
+			Console.WriteLine("Creating empty solution");
+			File.WriteAllText(cfg.Name + ".sln", ReadResource("Empty.sln"));
+		}
+
+
+		private static String ReadResource(String resourceName)
+		{
+			using var stream = Assembly
+				.GetExecutingAssembly()
+				.GetManifestResourceStream("Industrious.Starter.Resources." + resourceName)!;
+			using var reader = new StreamReader(stream);
+			return reader.ReadToEnd();
 		}
 	}
 }

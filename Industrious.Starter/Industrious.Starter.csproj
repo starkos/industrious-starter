@@ -11,4 +11,18 @@
     <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Empty.sln" />
+    <None Remove="Resources\editorconfig.txt" />
+    <EmbeddedResource Include="Resources\EditorConfig.txt" />
+    <None Remove="Resources\GitAttributes.txt" />
+    <EmbeddedResource Include="Resources\GitAttributes.txt" />
+    <None Remove="Resources\LICENSE.txt" />
+    <EmbeddedResource Include="Resources\LICENSE.txt" />
+    <None Remove="Resources\GitIgnore.txt" />
+    <EmbeddedResource Include="Resources\GitIgnore.txt" />
+    <None Remove="Resources\README.md" />
+    <EmbeddedResource Include="Resources\README.md" />
+  </ItemGroup>
+
 </Project>
