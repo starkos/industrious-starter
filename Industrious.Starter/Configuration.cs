@@ -2,12 +2,17 @@ using System.Text.Json;
 
 namespace Industrious.Starter;
 
+///////////////////////////////////////////////////////////////////////////////////////////
+/// <summary>
+/// Configuration and state information about the currently generated solution.
+/// </summary>
+///////////////////////////////////////////////////////////////////////////////////////////
 public class Configuration
 {
-	public Configuration(String name, String? title)
+	public Configuration(String name, String title)
 	{
 		Name = name;
-		Title = title ?? name;
+		Title = title;
 		Version = 0;
 	}
 

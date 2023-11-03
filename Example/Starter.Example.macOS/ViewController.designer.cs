@@ -5,10 +5,11 @@
 // Manual changes to this file may not be handled correctly.
 //
 
-namespace Starter.Example.macOS;
+namespace Starter.Example;
 
 [Register ("ViewController")]
-partial class ViewController {
+partial class ViewController
+{
 	void ReleaseDesignerOutlets ()
 	{
 	}

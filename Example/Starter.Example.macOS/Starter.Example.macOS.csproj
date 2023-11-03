@@ -5,5 +5,9 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>true</ImplicitUsings>
     <SupportedOSPlatformVersion>10.14</SupportedOSPlatformVersion>
+    <RootNamespace>Starter.Example</RootNamespace>
+    <Company>Industrious One</Company>
+    <Product>Starter.Example</Product>
+    <AssemblyName>Starter.Example</AssemblyName>
   </PropertyGroup>
 </Project>
