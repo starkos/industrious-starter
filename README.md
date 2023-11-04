@@ -4,7 +4,7 @@ Quickly bootstrap or update "Industrious-style" multi-platform .NET solutions.
 
 I like to "design in code" and often spin up projects to explore a new idea or technique. This little command line executable quickly generates the necessary solution and project files for all the platforms I like to play on, with the settings I prefer.
 
-See [Example](./Example/) for a sample gnerated project.
+See [Example](./Example/) for a sample generated project.
 
 ## Usage
 

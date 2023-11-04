@@ -3,9 +3,11 @@ namespace Starter.Example;
 [Register ("AppDelegate")]
 public class AppDelegate : NSApplicationDelegate
 {
+	private readonly MainWindowController _mainWindowController = new ();
+
 	public override void DidFinishLaunching (NSNotification notification)
 	{
-		// Insert code here to initialize your application
+		_mainWindowController.ShowWindow(this);
 	}
 
 	public override void WillTerminate (NSNotification notification)

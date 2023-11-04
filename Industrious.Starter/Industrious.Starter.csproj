@@ -1,31 +1,31 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1"/>
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Remove="Resources\editorconfig.txt" />
-    <None Remove="Resources\GitAttributes.txt" />
-    <None Remove="Resources\LICENSE.txt" />
-    <EmbeddedResource Include="Resources\LICENSE.txt" />
-    <None Remove="Resources\GitIgnore.txt" />
-    <None Remove="Resources\README.md" />
-    <EmbeddedResource Include="Resources\README.md" />
-    <None Remove="Resources\.editorconfig" />
-    <EmbeddedResource Include="Resources\.editorconfig" />
-    <None Remove="Resources\.gitattributes" />
-    <EmbeddedResource Include="Resources\.gitattributes" />
-    <None Remove="Resources\.gitignore" />
-    <EmbeddedResource Include="Resources\.gitignore" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Remove="Resources\editorconfig.txt"/>
+		<None Remove="Resources\GitAttributes.txt"/>
+		<None Remove="Resources\LICENSE.txt"/>
+		<EmbeddedResource Include="Resources\LICENSE.txt"/>
+		<None Remove="Resources\GitIgnore.txt"/>
+		<None Remove="Resources\README.md"/>
+		<EmbeddedResource Include="Resources\README.md"/>
+		<None Remove="Resources\.editorconfig"/>
+		<EmbeddedResource Include="Resources\.editorconfig"/>
+		<None Remove="Resources\.gitattributes"/>
+		<EmbeddedResource Include="Resources\.gitattributes"/>
+		<None Remove="Resources\.gitignore"/>
+		<EmbeddedResource Include="Resources\.gitignore"/>
+	</ItemGroup>
 
 
 </Project>
