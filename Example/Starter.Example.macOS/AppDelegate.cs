@@ -10,6 +10,11 @@ public class AppDelegate : NSApplicationDelegate
 		_mainWindowController.ShowWindow(this);
 	}
 
+	public override Boolean SupportsSecureRestorableState (NSApplication application)
+	{
+		return true;
+	}
+
 	public override void WillTerminate (NSNotification notification)
 	{
 		// Insert code here to tear down your application

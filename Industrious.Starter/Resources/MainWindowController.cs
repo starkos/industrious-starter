@@ -1,4 +1,4 @@
-namespace Starter.Example;
+namespace {Name};
 
 public sealed class MainWindowController : NSWindowController
 {
@@ -7,7 +7,7 @@ public sealed class MainWindowController : NSWindowController
 		const NSWindowStyle style = NSWindowStyle.Closable | NSWindowStyle.Resizable | NSWindowStyle.Titled;
 		Window = new NSWindow(new CGRect(100, 100, 800, 600), style, NSBackingStore.Buffered, true)
 		{
-			Title = "Example"
+			Title = "{Title}"
 		};
 
 		WindowFrameAutosaveName = "MainWindow";

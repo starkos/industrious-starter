@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleName</key>
-	<string>Starter.Example</string>
+	<string>Example</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.industriousone.Starter.Example</string>
 	<key>CFBundleShortVersionString</key>

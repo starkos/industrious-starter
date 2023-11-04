@@ -25,6 +25,8 @@
 		<EmbeddedResource Include="Resources\.gitattributes"/>
 		<None Remove="Resources\.gitignore"/>
 		<EmbeddedResource Include="Resources\.gitignore"/>
+		<Compile Remove="Resources\MainWindowController.cs" />
+		<EmbeddedResource Include="Resources\MainWindowController.cs" />
 	</ItemGroup>
 
 

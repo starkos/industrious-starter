@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Support Files", "Support Fi
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starter.Example.macOS", "Starter.Example.macOS\Starter.Example.macOS.csproj", "{2817BB0C-4DB0-4977-A60B-F453D04B7F65}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starter.Example.macOS", "Starter.Example.macOS\Starter.Example.macOS.csproj", "{6BB9F1E1-5DB0-4002-B96B-5819498AFDBF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,9 +23,9 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2817BB0C-4DB0-4977-A60B-F453D04B7F65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2817BB0C-4DB0-4977-A60B-F453D04B7F65}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2817BB0C-4DB0-4977-A60B-F453D04B7F65}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2817BB0C-4DB0-4977-A60B-F453D04B7F65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BB9F1E1-5DB0-4002-B96B-5819498AFDBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BB9F1E1-5DB0-4002-B96B-5819498AFDBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BB9F1E1-5DB0-4002-B96B-5819498AFDBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BB9F1E1-5DB0-4002-B96B-5819498AFDBF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

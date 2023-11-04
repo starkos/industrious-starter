@@ -182,8 +182,15 @@ internal static class Program
 					"\tprivate readonly MainWindowController _mainWindowController = new ();",
 					"")),
 			( // fill in `DidFinishLaunching()` implementation
-				Pattern: "// Insert code here to initialize your application",
-				Replacement: "_mainWindowController.ShowWindow(this);")
+				Pattern: @"\t\t// Insert code here to initialize your application.*?}",
+				Replacement: String.Join ("\n",
+					"\t\t_mainWindowController.ShowWindow(this);",
+					"\t}",
+					"",
+					"\tpublic override Boolean SupportsSecureRestorableState (NSApplication application)",
+					"\t{",
+					"\t\treturn true;",
+					"\t}"))
 		});
 
 		// Patch up `Main.cs`
@@ -194,33 +201,31 @@ internal static class Program
 				Replacement: cfg.Name)
 		});
 
-		// Patch up `ViewController.cs`
-
-		ModifyFile ($"{projectName}/ViewController.cs", new[] {
-			( // replace `MyProject.macOS` with `MyProject` for namespace, etc.
-				Pattern: projectName,
-				Replacement: cfg.Name),
-			( // move opening brace to new line
-				Pattern: " {",
-				Replacement: "\n{")
-		});
-
-		ModifyFile ($"{projectName}/ViewController.designer.cs", new[] {
-			( // replace `MyProject.macOS` with `MyProject` for namespace, etc.
-				Pattern: projectName,
-				Replacement: cfg.Name),
-			( // move opening brace to new line
-				Pattern: " {",
-				Replacement: "\n{")
-		});
-
 		// Patch up `Main.storyboard`
 
 		ModifyFile ($"{projectName}/Main.storyboard", new[] {
 			( // replace `MyProject.macOS` with application title in menus & windows
 				Pattern: projectName,
-				Replacement: cfg.Title)
+				Replacement: cfg.Title),
+			( // detach initial view controller
+				Pattern: " initialViewController=\"[a-zA-Z0-9-]+\"",
+				Replacement: ""),
+			( // remove the default window controller
+				Pattern: @"        <!\-\-Window Controller\-\->.*?</scene>\n",
+				Replacement: ""),
+			( // remove the default view controller
+				Pattern: @"        <!\-\-View Controller\-\->.*?</scene>\n",
+				Replacement: "")
 		});
+
+		// Remove the generated view controller
+		File.Delete ($"{projectName}/ViewController.cs");
+		File.Delete ($"{projectName}/ViewController.designer.cs");
+
+		// Add a main window controller
+		File.WriteAllText ($"{projectName}/MainWindowController.cs", ReadResource ("MainWindowController.cs")
+			.Replace ("{Name}", cfg.Name)
+			.Replace ("{Title}", cfg.Title));
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////
@@ -235,15 +240,19 @@ internal static class Program
 	///   values.
 	/// </param>
 	///////////////////////////////////////////////////////////////////////////////////
-	private static void ModifyFile (String fileName, (String Pattern, String Replacement)[] replacements)
+	private static void ModifyFile (String fileName, IList<(String Pattern, String Replacement)> replacements)
 	{
 		// Read in the contents of the file
 		var contents = File.ReadAllText (fileName);
 
 		// Apply the provided replacements
-		for (var i = 0; i < replacements.Length; ++i)
-			contents = Regex.Replace (contents, replacements[i].Pattern, replacements[i].Replacement,
-				RegexOptions.Multiline);
+		for (var i = 0; i < replacements.Count; ++i)
+		{
+			var options = replacements[i].Pattern.StartsWith ("^")
+				? RegexOptions.Multiline
+				: RegexOptions.Singleline;
+			contents = Regex.Replace (contents, replacements[i].Pattern, replacements[i].Replacement, options);
+		}
 
 		// Write it back out
 		File.WriteAllText (fileName, contents);
