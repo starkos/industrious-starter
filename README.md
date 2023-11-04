@@ -22,9 +22,11 @@ $ Industrious.Starter new Starter.Example --title Example
 
 ## // TODO:
 
-- [ ] Generate solution
-- [ ] Generate macOS projects
+- [x] Generate solution
+- [x] Generate macOS project
 - [ ] Generate iPhone project
 - [ ] Generate iPad project
+- [ ] Generate Windows project
+- [ ] Generate Android project
 - [ ] Generate web project
 - [ ] Generate console project
