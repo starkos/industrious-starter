@@ -149,7 +149,7 @@ internal static class Program
 				Pattern: "  </PropertyGroup>",
 				Replacement: String.Join ("\n",
 					$"    <RootNamespace>{cfg.Name}</RootNamespace>",
-					$"    <AssemblyName>{cfg.Name}</AssemblyName>",
+					$"    <AssemblyName>{cfg.Title}</AssemblyName>",
 					$"    <Company>{CompanyName}</Company>",
 					$"    <Product>{cfg.Name}</Product>",
 					"  </PropertyGroup>"))
