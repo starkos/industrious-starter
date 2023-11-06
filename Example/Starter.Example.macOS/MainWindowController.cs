@@ -2,10 +2,10 @@ namespace Starter.Example;
 
 public sealed class MainWindowController : NSWindowController
 {
-	public MainWindowController()
+	public MainWindowController ()
 	{
 		const NSWindowStyle style = NSWindowStyle.Closable | NSWindowStyle.Resizable | NSWindowStyle.Titled;
-		Window = new NSWindow(new CGRect(100, 100, 800, 600), style, NSBackingStore.Buffered, true)
+		Window = new NSWindow (new CGRect (100, 100, 800, 600), style, NSBackingStore.Buffered, true)
 		{
 			Title = "Example"
 		};

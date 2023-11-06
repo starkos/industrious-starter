@@ -18,7 +18,8 @@ internal static class Program
 	private static readonly Action<Configuration>[] Versions = {
 		CreateSupportFiles,
 		CreateSolution,
-		CreateMacOsProject
+		CreateMacOsProject,
+		CreateConsoleExecutableProject
 	};
 
 	///////////////////////////////////////////////////////////////////////////////////
@@ -28,29 +29,36 @@ internal static class Program
 	///////////////////////////////////////////////////////////////////////////////////
 	public static Int32 Main (String[] args)
 	{
-		// Command arguments; reused across commands
-		var slnNameArgument = new Argument<String> ("sln_name", "name of the solution to be generated");
+		// New solution command
 
-		// Command options; reused across commands
+		var slnNameArgument = new Argument<String> ("sln_name", "name of the solution to be generated");
 		var titleOption = new Option<String?> (new[] { "-t", "--title" }, "application title; defaults to solution name");
 
-		// New solution command
 		var newCommand = new Command ("new", "Generate a new solution") {
 			slnNameArgument,
 			titleOption
 		};
 
-		newCommand.SetHandler (OnNew, slnNameArgument, titleOption);
+		newCommand.SetHandler (OnNewCommand, slnNameArgument, titleOption);
+
+		// Update solution command
+
+		var updateCommand = new Command ("update", "Update the current solution");
+		updateCommand.SetHandler (OnUpdateCommand);
 
 		// Put it all together; make it go brr
+
 		var rootCommand = new RootCommand ("Generate an Industrious standard .NET solution");
+
 		rootCommand.AddCommand (newCommand);
+		rootCommand.AddCommand (updateCommand);
+
 		return rootCommand.Invoke (args);
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////
 	/// <summary>
-	///   Generate a new solution; called in response to `new` command.
+	///   Generate a new solution.
 	/// </summary>
 	/// <param name="name">
 	///   A name for the new solution.
@@ -59,10 +67,35 @@ internal static class Program
 	///   An optional application title.
 	/// </param>
 	///////////////////////////////////////////////////////////////////////////////////
-	private static void OnNew (String name, String? title)
+	private static void OnNewCommand (String name, String? title)
 	{
 		var cfg = new Configuration (name, title ?? name);
-		ApplyUpdates (cfg);
+		cfg.Version = ApplyUpdates (cfg);
+		cfg.Save (ConfigFileName);
+	}
+
+
+	///////////////////////////////////////////////////////////////////////////////////
+	/// <summary>
+	///   Update an existing solution.
+	/// </summary>
+	///////////////////////////////////////////////////////////////////////////////////
+	private static void OnUpdateCommand ()
+	{
+		var cfg = Configuration.Load (ConfigFileName);
+		if (cfg == null)
+		{
+			Console.WriteLine($"Error: `{ConfigFileName}` not found");
+			Environment.Exit (1);
+		}
+
+		if (cfg.Version == Versions.Length)
+		{
+			Console.WriteLine("Solution is already up to date");
+			Environment.Exit (0);
+		}
+
+		cfg.Version = ApplyUpdates (cfg);
 		cfg.Save (ConfigFileName);
 	}
 
@@ -74,10 +107,11 @@ internal static class Program
 	///   The current solution's configuration, which includes its current version.
 	/// </param>
 	///////////////////////////////////////////////////////////////////////////////////
-	private static void ApplyUpdates (Configuration cfg)
+	private static Int32 ApplyUpdates (Configuration cfg)
 	{
 		for (var i = cfg.Version; i < Versions.Length; ++i)
 			Versions[i].Invoke (cfg);
+		return Versions.Length;
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////
@@ -226,6 +260,22 @@ internal static class Program
 		File.WriteAllText ($"{projectName}/MainWindowController.cs", ReadResource ("MainWindowController.cs")
 			.Replace ("{Name}", cfg.Name)
 			.Replace ("{Title}", cfg.Title));
+	}
+
+	///////////////////////////////////////////////////////////////////////////////////
+	/// <summary>
+	///   Create the macOS project and add it to the solution.
+	/// </summary>
+	///////////////////////////////////////////////////////////////////////////////////
+	private static void CreateConsoleExecutableProject (Configuration cfg)
+	{
+		var projectName = cfg.Name + ".Console";
+
+		// Use `dotnet` to create a new project from the "macOS" template, and then
+		// add it to the previously generated solution
+
+		RunCommand ("dotnet", $"new console --output {projectName} --force");
+		RunCommand ("dotnet", $"sln add {projectName}/{projectName}.csproj");
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////

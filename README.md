@@ -29,4 +29,4 @@ $ Industrious.Starter new Starter.Example --title Example
 - [ ] Generate Windows project
 - [ ] Generate Android project
 - [ ] Generate web project
-- [ ] Generate console project
+- [x] Generate console project
