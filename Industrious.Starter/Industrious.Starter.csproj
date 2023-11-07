@@ -12,22 +12,30 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Remove="Resources\editorconfig.txt"/>
-		<None Remove="Resources\GitAttributes.txt"/>
-		<None Remove="Resources\LICENSE.txt"/>
+		<EmbeddedResource Include="Resources\editorconfig" />
+		<EmbeddedResource Include="Resources\gitattributes" />
+		<EmbeddedResource Include="Resources\gitignore" />
 		<EmbeddedResource Include="Resources\LICENSE.txt"/>
-		<None Remove="Resources\GitIgnore.txt"/>
-		<None Remove="Resources\README.md"/>
 		<EmbeddedResource Include="Resources\README.md"/>
-		<None Remove="Resources\.editorconfig"/>
-		<EmbeddedResource Include="Resources\.editorconfig"/>
-		<None Remove="Resources\.gitattributes"/>
-		<EmbeddedResource Include="Resources\.gitattributes"/>
-		<None Remove="Resources\.gitignore"/>
-		<EmbeddedResource Include="Resources\.gitignore"/>
-		<Compile Remove="Resources\MainWindowController.cs" />
-		<EmbeddedResource Include="Resources\MainWindowController.cs" />
+		<EmbeddedResource Include="Resources\Solution" />
+		<EmbeddedResource Include="Resources\Console\Program" />
+		<EmbeddedResource Include="Resources\Console\Project" />
+		<EmbeddedResource Include="Resources\macOS\AppDelegate" />
+		<EmbeddedResource Include="Resources\macOS\Entitlements.plist" />
+		<EmbeddedResource Include="Resources\macOS\Info.plist" />
+		<EmbeddedResource Include="Resources\macOS\Main" />
+		<EmbeddedResource Include="Resources\macOS\Main.storyboard" />
+		<EmbeddedResource Include="Resources\macOS\MainWindowController" />
+		<EmbeddedResource Include="Resources\macOS\Project" />
+		<EmbeddedResource Include="Resources\macOS\Assets.xcassets\Contents.json" />
+		<EmbeddedResource Include="Resources\macOS\Assets.xcassets\AppIcon.appiconset\Contents.json" />
+		<EmbeddedResource Include="Resources\macOS\Assets.xcassets\AppIcon.appiconset\Icon16.png" />
+		<EmbeddedResource Include="Resources\macOS\Assets.xcassets\AppIcon.appiconset\Icon32.png" />
+		<EmbeddedResource Include="Resources\macOS\Assets.xcassets\AppIcon.appiconset\Icon64.png" />
+		<EmbeddedResource Include="Resources\macOS\Assets.xcassets\AppIcon.appiconset\Icon128.png" />
+		<EmbeddedResource Include="Resources\macOS\Assets.xcassets\AppIcon.appiconset\Icon256.png" />
+		<EmbeddedResource Include="Resources\macOS\Assets.xcassets\AppIcon.appiconset\Icon512.png" />
+		<EmbeddedResource Include="Resources\macOS\Assets.xcassets\AppIcon.appiconset\Icon1024.png" />
 	</ItemGroup>
-
 
 </Project>

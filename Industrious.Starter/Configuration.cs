@@ -4,27 +4,32 @@ namespace Industrious.Starter;
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 /// <summary>
-///  Configuration and state information about the currently generated solution.
+///  Workspace settings which are serialized and persisted between runs.
 /// </summary>
 ///////////////////////////////////////////////////////////////////////////////////////////
 public class Configuration
 {
-	public Configuration (String name, String title)
+	public Configuration (Workspace workspace)
 	{
-		Name = name;
-		Title = title;
-		Version = 0;
+		Name = workspace.Name;
+		Title = workspace.ApplicationTitle;
+		Company = workspace.CompanyName;
+		Identifier = workspace.CompanyIdentifier;
+		Version = workspace.CurrentVersion;
 	}
 
 	public String Name { get; set; }
 	public String Title { get; set; }
+	public String Company { get; set; }
+	public String Identifier { get; set; }
 	public Int32 Version { get; set; }
 
-	public static Configuration? Load (String path)
+
+	public static Configuration? Load (String fileName)
 	{
 		try
 		{
-			var json = File.ReadAllText (path);
+			var json = File.ReadAllText (fileName);
 			return JsonSerializer.Deserialize<Configuration> (json);
 		}
 		catch (FileNotFoundException)
@@ -33,10 +38,11 @@ public class Configuration
 		}
 	}
 
-	public void Save (String path)
+
+	public void Save (String fileName)
 	{
 		var options = new JsonSerializerOptions { WriteIndented = true };
 		var json = JsonSerializer.Serialize (this, options);
-		File.WriteAllText (path, json);
+		File.WriteAllText (fileName, json);
 	}
 }

@@ -4,9 +4,9 @@
     <OutputType>Exe</OutputType>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>Starter.Example</RootNamespace>
-    <AssemblyName>Example</AssemblyName>
-    <Company>Industrious One</Company>
-    <Product>Starter.Example</Product>
+    <RootNamespace>{Name}</RootNamespace>
+    <AssemblyName>{Title}</AssemblyName>
+    <Company>{Company}</Company>
+    <Product>{Name}</Product>
   </PropertyGroup>
 </Project>
