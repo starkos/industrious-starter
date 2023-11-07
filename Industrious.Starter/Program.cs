@@ -1,13 +1,7 @@
-﻿using System.CommandLine;
+﻿namespace Industrious.Starter;
 
-namespace Industrious.Starter;
-
-internal static class Program
+internal class Program : ICommandLineHandler
 {
-	// Default company information
-	private const String CompanyName = "Industrious One";
-	private const String CompanyId = "com.industriousone";
-
 	// Name of file used to store last-run configuration about the solution
 	private const String ConfigFileName = ".starter.json";
 
@@ -20,45 +14,9 @@ internal static class Program
 
 	public static Int32 Main (String[] args)
 	{
-		// New solution command
-
-		var nameArgument = new Argument<String> (
-			name: "name",
-			description: "name of the solution to be generated");
-
-		var titleOption = new Option<String?> (
-			aliases: new[] { "--title" },
-			description: "application title; defaults to solution name");
-
-		var companyOption = new Option<String> (
-			aliases: new[] { "--company" },
-			description: $@"company name; defaults to {CompanyName}",
-			getDefaultValue: () => CompanyName);
-
-		var identifierOption = new Option<String> (
-			aliases: new[] { "--id" },
-			description: $@"company identifier; defaults to {CompanyId}",
-			getDefaultValue: () => CompanyId);
-
-		var newCommand = new Command ("new", "Generate a new solution") {
-			nameArgument, titleOption, companyOption, identifierOption
-		};
-
-		newCommand.SetHandler (OnNewCommand, nameArgument, titleOption, companyOption, identifierOption);
-
-		// Update solution command
-
-		var updateCommand = new Command ("update", "Update the current solution");
-		updateCommand.SetHandler (OnUpdateCommand);
-
-		// Put it all together; make it go brr
-
-		var rootCommand = new RootCommand ("Generate an Industrious standard .NET solution");
-
-		rootCommand.AddCommand (newCommand);
-		rootCommand.AddCommand (updateCommand);
-
-		return rootCommand.Invoke (args);
+		var program = new Program ();
+		var parser = new CommandLineParser (program);
+		return parser.Parse (args);
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////
@@ -68,20 +26,20 @@ internal static class Program
 	/// <param name="name">
 	///   A name for the new solution.
 	/// </param>
-	/// <param name="title">
+	/// <param name="applicationTitle">
 	///   An optional application title.
 	/// </param>
-	/// <param name="company">
+	/// <param name="companyName">
 	///    A company name, to use in templates where applicable.
 	/// </param>
-	/// <param name="identifier">
+	/// <param name="companyIdentifier">
 	///    A company identifier, to use in templates where applicable.
 	/// </param>
 	///////////////////////////////////////////////////////////////////////////////////
 
-	private static void OnNewCommand (String name, String? title, String company, String identifier)
+	public void OnNewSolution (String name, String? applicationTitle, String companyName, String companyIdentifier)
 	{
-		var workspace = new Workspace (name, title ?? name, company, identifier);
+		var workspace = new Workspace (name, applicationTitle ?? name, companyName, companyIdentifier);
 		workspace.CurrentVersion = Updates.Apply (workspace);
 		workspace.Save (ConfigFileName);
 	}
@@ -93,7 +51,7 @@ internal static class Program
 	/// </summary>
 	///////////////////////////////////////////////////////////////////////////////////
 
-	private static void OnUpdateCommand ()
+	public void OnUpdateSolution ()
 	{
 		var workspace = Workspace.Load (ConfigFileName);
 		if (workspace == null)
