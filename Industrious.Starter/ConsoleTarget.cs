@@ -4,10 +4,15 @@ public class ConsoleTarget
 {
 	public ConsoleTarget (String name)
 	{
-		Project = new TextFile ($"{name}.Console/{name}.Console.csproj");
-		Program = new TextFile ($"{name}.Console/Program.cs");
+		var projectFolder = $"Code/{name}.Console";
+		ProjectPath = $"{projectFolder}/{name}.Console.csproj";
+
+		Project = new TextFile (ProjectPath);
+		Program = new TextFile ($"{projectFolder}/Program.cs");
 	}
 
+
+	public String ProjectPath { get; }
 
 	public TextFile Project { get; }
 	public TextFile Program { get; }

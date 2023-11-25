@@ -9,10 +9,13 @@ public class SolutionFile : TextFile
 	{}
 
 
-	public SolutionFile AddProject (String name, String identifier)
+	public SolutionFile AddProject (String projectPath, String identifier)
 	{
+		var projectName = Path.GetFileNameWithoutExtension (projectPath);
+		projectPath = projectPath.Replace ("/", "\\");
+
 		InsertBeforeLast ("^Global", String.Join ("\r\n",
-			$@"Project(""{{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}}"") = ""{name}"", ""{name}\{name}.csproj"", ""{identifier}""",
+			$@"Project(""{{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}}"") = ""{projectName}"", ""{projectPath}"", ""{identifier}""",
 			"EndProject",
 			""));
 

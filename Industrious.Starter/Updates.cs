@@ -89,9 +89,12 @@ public static class Updates
 			.Replace ("{Title}", wks.ApplicationTitle);
 
 		foreach (var asset in wks.MacOs.Assets)
-			asset.CopyFromResource (String.Concat ("macOS", asset.Path.AsSpan (asset.Path.IndexOf ('/'))));
+		{
+			var resourcePath = asset.Path.AsSpan (wks.MacOs.ProjectFolder.Length);
+			asset.CopyFromResource (String.Concat ("macOS", resourcePath));
+		}
 
-		wks.Solution.AddProject ($"{wks.Name}.macOS", "{40B768D8-DCF3-4353-A813-089E779F2E0E}");
+		wks.Solution.AddProject (wks.MacOs.ProjectPath, "{40B768D8-DCF3-4353-A813-089E779F2E0E}");
 	}
 
 
@@ -106,6 +109,6 @@ public static class Updates
 
 		wks.Console.Program.LoadFromResource ("Console/Program");
 
-		wks.Solution.AddProject ($"{wks.Name}.Console", "{548B54F6-AF78-4582-A875-75BE2F0BBA07}");
+		wks.Solution.AddProject (wks.Console.ProjectPath, "{548B54F6-AF78-4582-A875-75BE2F0BBA07}");
 	}
 }

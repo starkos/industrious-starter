@@ -4,27 +4,33 @@ public class MacOsTarget
 {
 	public MacOsTarget (String name)
 	{
-		Project = new TextFile ($"{name}.macOS/{name}.macOS.csproj");
-		AppDelegate = new TextFile ($"{name}.macOS/AppDelegate.cs");
-		Entitlements = new TextFile ($"{name}.macOS/Entitlements.plist");
-		Info = new TextFile ($"{name}.macOS/Info.plist");
-		Main = new TextFile ($"{name}.macOS/Main.cs");
-		MainStoryboard = new TextFile ($"{name}.macOS/Main.storyboard");
-		MainWindowController = new TextFile ($"{name}.macOS/MainWindowController.cs");
+		ProjectFolder = $"Code/{name}.macOS";
+		ProjectPath = $"{ProjectFolder}/{name}.macOS.csproj";
+
+		Project = new TextFile (ProjectPath);
+		AppDelegate = new TextFile ($"{ProjectFolder}/AppDelegate.cs");
+		Entitlements = new TextFile ($"{ProjectFolder}/Entitlements.plist");
+		Info = new TextFile ($"{ProjectFolder}/Info.plist");
+		Main = new TextFile ($"{ProjectFolder}/Main.cs");
+		MainStoryboard = new TextFile ($"{ProjectFolder}/Main.storyboard");
+		MainWindowController = new TextFile ($"{ProjectFolder}/MainWindowController.cs");
 
 		Assets = new[] {
-			new BinaryFile ($"{name}.macOS/Assets.xcassets/Contents.json"),
-			new BinaryFile ($"{name}.macOS/Assets.xcassets/AppIcon.appiconset/Contents.json"),
-			new BinaryFile ($"{name}.macOS/Assets.xcassets/AppIcon.appiconset/Icon16.png"),
-			new BinaryFile ($"{name}.macOS/Assets.xcassets/AppIcon.appiconset/Icon32.png"),
-			new BinaryFile ($"{name}.macOS/Assets.xcassets/AppIcon.appiconset/Icon64.png"),
-			new BinaryFile ($"{name}.macOS/Assets.xcassets/AppIcon.appiconset/Icon128.png"),
-			new BinaryFile ($"{name}.macOS/Assets.xcassets/AppIcon.appiconset/Icon256.png"),
-			new BinaryFile ($"{name}.macOS/Assets.xcassets/AppIcon.appiconset/Icon512.png"),
-			new BinaryFile ($"{name}.macOS/Assets.xcassets/AppIcon.appiconset/Icon1024.png"),
+			new BinaryFile ($"{ProjectFolder}/Assets.xcassets/Contents.json"),
+			new BinaryFile ($"{ProjectFolder}/Assets.xcassets/AppIcon.appiconset/Contents.json"),
+			new BinaryFile ($"{ProjectFolder}/Assets.xcassets/AppIcon.appiconset/Icon16.png"),
+			new BinaryFile ($"{ProjectFolder}/Assets.xcassets/AppIcon.appiconset/Icon32.png"),
+			new BinaryFile ($"{ProjectFolder}/Assets.xcassets/AppIcon.appiconset/Icon64.png"),
+			new BinaryFile ($"{ProjectFolder}/Assets.xcassets/AppIcon.appiconset/Icon128.png"),
+			new BinaryFile ($"{ProjectFolder}/Assets.xcassets/AppIcon.appiconset/Icon256.png"),
+			new BinaryFile ($"{ProjectFolder}/Assets.xcassets/AppIcon.appiconset/Icon512.png"),
+			new BinaryFile ($"{ProjectFolder}/Assets.xcassets/AppIcon.appiconset/Icon1024.png"),
 		};
 	}
 
+
+	public String ProjectFolder { get; }
+	public String ProjectPath { get; }
 
 	public TextFile Project { get; }
 	public TextFile AppDelegate { get; }
