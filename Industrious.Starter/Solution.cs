@@ -2,14 +2,14 @@ using System.Text;
 
 namespace Industrious.Starter;
 
-public class SolutionFile : TextFile
+public class Solution : TextFile
 {
-	public SolutionFile (String name)
+	public Solution (String name)
 		: base ($"{name}.sln", new UTF8Encoding(true))
 	{}
 
 
-	public SolutionFile AddProject (String projectPath, String identifier)
+	public Solution AddProject (String projectPath, String identifier)
 	{
 		var projectName = System.IO.Path.GetFileNameWithoutExtension (projectPath);
 		projectPath = projectPath.Replace ("/", "\\");
@@ -30,7 +30,7 @@ public class SolutionFile : TextFile
 	}
 
 
-	public SolutionFile AddSolutionItem (String name)
+	public Solution AddSolutionItem (String name)
 	{
 		InsertBeforeLast ("\tEndProjectSection", $"\t\t{name} = {name}\r\n");
 		return this;

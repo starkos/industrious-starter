@@ -1,11 +1,11 @@
 namespace Industrious.Starter;
 
-public class ClassLibTarget
+public class ClassLibraryProject
 {
 	private readonly TextFile _project;
 
 
-	public ClassLibTarget (String name)
+	public ClassLibraryProject (String name)
 	{
 		Path = $"Code/{name}/{name}.csproj";
 

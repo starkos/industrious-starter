@@ -16,12 +16,12 @@ public class Workspace
 		License = new TextFile ("LICENSE.txt");
 		Readme = new TextFile ("README.md");
 
-		Solution = new SolutionFile (name);
+		Solution = new Solution (name);
 
-		Core = new ClassLibTarget ($"{name}.Core");
+		Core = new ClassLibraryProject ($"{name}.Core");
 
-		Console = new ConsoleTarget ($"{name}.Console");
-		MacOs = new MacOsTarget ($"{name}.macOS");
+		Console = new ConsoleProject ($"{name}.Console");
+		MacOs = new MacOsProject ($"{name}.macOS");
 	}
 
 
@@ -37,12 +37,12 @@ public class Workspace
 	public TextFile License { get; }
 	public TextFile Readme { get; }
 
-	public SolutionFile Solution { get; }
+	public Solution Solution { get; }
 
-	public ClassLibTarget Core { get; }
+	public ClassLibraryProject Core { get; }
 
-	public ConsoleTarget Console { get; }
-	public MacOsTarget MacOs { get; }
+	public ConsoleProject Console { get; }
+	public MacOsProject MacOs { get; }
 
 
 	public static Workspace? Load (String settingsFileName)

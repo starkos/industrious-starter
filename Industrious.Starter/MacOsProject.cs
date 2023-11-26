@@ -1,6 +1,6 @@
 namespace Industrious.Starter;
 
-public class MacOsTarget
+public class MacOsProject
 {
 	private readonly TextFile _project;
 	private readonly TextFile _appDelegate;
@@ -12,7 +12,7 @@ public class MacOsTarget
 	private readonly IList<BinaryFile> _assets;
 
 
-	public MacOsTarget (String name)
+	public MacOsProject (String name)
 	{
 		var projectFolder = $"Code/{name}";
 		Path = $"{projectFolder}/{name}.csproj";

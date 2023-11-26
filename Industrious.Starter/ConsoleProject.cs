@@ -1,12 +1,12 @@
 namespace Industrious.Starter;
 
-public class ConsoleTarget
+public class ConsoleProject
 {
 	private readonly TextFile _project;
 	private readonly TextFile _program;
 
 
-	public ConsoleTarget (String name)
+	public ConsoleProject (String name)
 	{
 		var projectFolder = $"Code/{name}";
 		Path = $"{projectFolder}/{name}.csproj";
