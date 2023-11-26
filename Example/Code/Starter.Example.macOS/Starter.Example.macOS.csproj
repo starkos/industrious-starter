@@ -10,4 +10,7 @@
     <Company>Industrious One</Company>
     <Product>Starter.Example</Product>
   </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Starter.Example.Core\Starter.Example.Core.csproj" />
+  </ItemGroup>
 </Project>

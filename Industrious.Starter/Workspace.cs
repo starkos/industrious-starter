@@ -18,8 +18,9 @@ public class Workspace
 
 		Solution = new SolutionFile (name);
 
-		Console = new ConsoleTarget (name);
-		MacOs = new MacOsTarget (name);
+		Console = new ConsoleTarget (name + ".Console");
+		Core = new ClassLibTarget (name + ".Core");
+		MacOs = new MacOsTarget (name + ".macOS");
 	}
 
 
@@ -38,6 +39,7 @@ public class Workspace
 	public SolutionFile Solution { get; }
 
 	public ConsoleTarget Console { get; }
+	public ClassLibTarget Core { get; }
 	public MacOsTarget MacOs { get; }
 
 
@@ -61,6 +63,7 @@ public class Workspace
 		Solution.Save ();
 
 		Console.Save ();
+		Core.Save ();
 		MacOs.Save ();
 
 		var configuration = new Configuration (this);

@@ -42,6 +42,7 @@ internal class Program : ICommandLineHandler
 		var workspace = new Workspace (name, applicationTitle ?? name, companyName, companyIdentifier);
 		workspace.CurrentVersion = Updates.Apply (workspace);
 		workspace.Save (ConfigFileName);
+		Console.WriteLine ("Done");
 	}
 
 
@@ -64,6 +65,7 @@ internal class Program : ICommandLineHandler
 		{
 			workspace.CurrentVersion = Updates.Apply (workspace);
 			workspace.Save (ConfigFileName);
+			Console.WriteLine ("Done");
 		}
 		else
 		{

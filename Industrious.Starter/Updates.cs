@@ -10,6 +10,7 @@ public static class Updates
 	private static readonly Action<Workspace>[] Versions = {
 		CreateEmptySolution,
 		CreateTopLevelSupportFiles,
+		CreateCoreLibraryProject,
 		CreateMacOsProject,
 		CreateConsoleExecutableProject
 	};
@@ -54,6 +55,16 @@ public static class Updates
 			.AddSolutionItem (".gitignore")
 			.AddSolutionItem ("LICENSE.txt")
 			.AddSolutionItem ("README.md");
+	}
+
+
+	private static void CreateCoreLibraryProject (Workspace wks)
+	{
+		Console.WriteLine ("Creating core library project");
+
+		wks.Core.Project.LoadFromResource ("Core/Project");
+
+		wks.Solution.AddProject (wks.Core.ProjectPath, "{E4DCEF92-4272-4329-B946-6BA46249C619}");
 	}
 
 

@@ -9,4 +9,7 @@
     <Company>{Company}</Company>
     <Product>{Name}</Product>
   </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\{Name}.Core\{Name}.Core.csproj" />
+  </ItemGroup>
 </Project>

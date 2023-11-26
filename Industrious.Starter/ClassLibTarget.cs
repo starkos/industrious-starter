@@ -1,26 +1,23 @@
 namespace Industrious.Starter;
 
-public class ConsoleTarget
+public class ClassLibTarget
 {
-	public ConsoleTarget (String name)
+	public ClassLibTarget (String name)
 	{
 		var projectFolder = $"Code/{name}";
 		ProjectPath = $"{projectFolder}/{name}.csproj";
 
 		Project = new TextFile (ProjectPath);
-		Program = new TextFile ($"{projectFolder}/Program.cs");
 	}
 
 
 	public String ProjectPath { get; }
 
 	public TextFile Project { get; }
-	public TextFile Program { get; }
 
 
 	public void Save ()
 	{
 		Project.Save ();
-		Program.Save ();
 	}
 }

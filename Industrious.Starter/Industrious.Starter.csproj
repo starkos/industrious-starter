@@ -20,6 +20,7 @@
 		<EmbeddedResource Include="Resources\Solution" />
 		<EmbeddedResource Include="Resources\Console\Program" />
 		<EmbeddedResource Include="Resources\Console\Project" />
+		<EmbeddedResource Include="Resources\Core\Project" />
 		<EmbeddedResource Include="Resources\macOS\AppDelegate" />
 		<EmbeddedResource Include="Resources\macOS\Entitlements.plist" />
 		<EmbeddedResource Include="Resources\macOS\Info.plist" />

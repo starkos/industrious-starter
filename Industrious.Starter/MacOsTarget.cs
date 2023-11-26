@@ -4,8 +4,8 @@ public class MacOsTarget
 {
 	public MacOsTarget (String name)
 	{
-		ProjectFolder = $"Code/{name}.macOS";
-		ProjectPath = $"{ProjectFolder}/{name}.macOS.csproj";
+		ProjectFolder = $"Code/{name}";
+		ProjectPath = $"{ProjectFolder}/{name}.csproj";
 
 		Project = new TextFile (ProjectPath);
 		AppDelegate = new TextFile ($"{ProjectFolder}/AppDelegate.cs");
