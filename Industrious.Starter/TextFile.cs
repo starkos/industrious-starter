@@ -6,7 +6,6 @@ namespace Industrious.Starter;
 
 public class TextFile
 {
-	private readonly String _path;
 	private readonly Encoding _encoding;
 	private String? _contents;
 	private Boolean _isDirty;
@@ -14,16 +13,19 @@ public class TextFile
 
 	public TextFile (String path, Encoding? encoding = null)
 	{
-		_path = path;
+		Path = path;
 		_encoding = encoding ?? new UTF8Encoding ();
 		_contents = null;
 		_isDirty = false;
 	}
 
 
+	public String Path { get; }
+
+
 	private String Contents
 	{
-		get => _contents ?? File.ReadAllText (_path, _encoding);
+		get => _contents ?? File.ReadAllText (Path, _encoding);
 		set => _contents = value;
 	}
 
@@ -66,11 +68,11 @@ public class TextFile
 	{
 		if (_isDirty)
 		{
-			var directory = Path.GetDirectoryName (_path);
+			var directory = System.IO.Path.GetDirectoryName (Path);
 			if (!String.IsNullOrEmpty (directory))
 				Directory.CreateDirectory (directory);
 
-			File.WriteAllText (_path, _contents, _encoding);
+			File.WriteAllText (Path, _contents, _encoding);
 			_isDirty = false;
 		}
 	}

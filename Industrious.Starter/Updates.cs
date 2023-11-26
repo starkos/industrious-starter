@@ -61,65 +61,23 @@ public static class Updates
 	private static void CreateCoreLibraryProject (Workspace wks)
 	{
 		Console.WriteLine ("Creating core library project");
-
-		wks.Core.Project.LoadFromResource ("Core/Project");
-
-		wks.Solution.AddProject (wks.Core.ProjectPath, "{E4DCEF92-4272-4329-B946-6BA46249C619}");
+		wks.Core.LoadFromResources ();
+		wks.Solution.AddProject (wks.Core.Path, "{E4DCEF92-4272-4329-B946-6BA46249C619}");
 	}
 
 
 	private static void CreateMacOsProject (Workspace wks)
 	{
 		Console.WriteLine ("Creating macOS project");
-
-		wks.MacOs.Project.LoadFromResource ("macOS/Project")
-			.Replace ("{Name}", wks.Name)
-			.Replace ("{Title}", wks.ApplicationTitle)
-			.Replace ("{Company}", wks.CompanyName);
-
-		wks.MacOs.AppDelegate.LoadFromResource ("macOS/AppDelegate")
-			.Replace ("{Name}", wks.Name);
-
-		wks.MacOs.Entitlements.LoadFromResource ("macOS/Entitlements.plist");
-
-		wks.MacOs.Info.LoadFromResource ("macOS/Info.plist")
-			.Replace ("{Name}", wks.Name)
-			.Replace ("{Title}", wks.ApplicationTitle)
-			.Replace ("{Company}", wks.CompanyName)
-			.Replace ("{Identifier}", wks.CompanyIdentifier)
-			.Replace ("{Year}", DateTime.Now.Year.ToString ());
-
-		wks.MacOs.Main.LoadFromResource ("macOS/Main")
-			.Replace ("{Name}", wks.Name);
-
-		wks.MacOs.MainStoryboard.LoadFromResource ("macOS/Main.storyboard")
-			.Replace ("{Title}", wks.ApplicationTitle);
-
-		wks.MacOs.MainWindowController.LoadFromResource ("macOS/MainWindowController")
-			.Replace ("{Name}", wks.Name)
-			.Replace ("{Title}", wks.ApplicationTitle);
-
-		foreach (var asset in wks.MacOs.Assets)
-		{
-			var resourcePath = asset.Path.AsSpan (wks.MacOs.ProjectFolder.Length);
-			asset.CopyFromResource (String.Concat ("macOS", resourcePath));
-		}
-
-		wks.Solution.AddProject (wks.MacOs.ProjectPath, "{40B768D8-DCF3-4353-A813-089E779F2E0E}");
+		wks.MacOs.LoadFromResources (wks);
+		wks.Solution.AddProject (wks.MacOs.Path, "{40B768D8-DCF3-4353-A813-089E779F2E0E}");
 	}
 
 
 	private static void CreateConsoleExecutableProject (Workspace wks)
 	{
 		Console.WriteLine ("Creating console executable project");
-
-		wks.Console.Project.LoadFromResource ("Console/Project")
-			.Replace ("{Name}", wks.Name)
-			.Replace ("{Title}", wks.ApplicationTitle)
-			.Replace ("{Company}", wks.CompanyName);
-
-		wks.Console.Program.LoadFromResource ("Console/Program");
-
-		wks.Solution.AddProject (wks.Console.ProjectPath, "{548B54F6-AF78-4582-A875-75BE2F0BBA07}");
+		wks.Console.LoadFromResources (wks);
+		wks.Solution.AddProject (wks.Console.Path, "{548B54F6-AF78-4582-A875-75BE2F0BBA07}");
 	}
 }

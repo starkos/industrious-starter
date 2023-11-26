@@ -2,25 +2,37 @@ namespace Industrious.Starter;
 
 public class ConsoleTarget
 {
+	private readonly TextFile _project;
+	private readonly TextFile _program;
+
+
 	public ConsoleTarget (String name)
 	{
 		var projectFolder = $"Code/{name}";
-		ProjectPath = $"{projectFolder}/{name}.csproj";
+		Path = $"{projectFolder}/{name}.csproj";
 
-		Project = new TextFile (ProjectPath);
-		Program = new TextFile ($"{projectFolder}/Program.cs");
+		_project = new TextFile (Path);
+		_program = new TextFile ($"{projectFolder}/Program.cs");
 	}
 
 
-	public String ProjectPath { get; }
+	public String Path { get; }
 
-	public TextFile Project { get; }
-	public TextFile Program { get; }
+
+	public void LoadFromResources (Workspace wks)
+	{
+		_project.LoadFromResource ("Console/Project")
+			.Replace ("{Name}", wks.Name)
+			.Replace ("{Title}", wks.ApplicationTitle)
+			.Replace ("{Company}", wks.CompanyName);
+
+		_program.LoadFromResource ("Console/Program");
+	}
 
 
 	public void Save ()
 	{
-		Project.Save ();
-		Program.Save ();
+		_project.Save ();
+		_program.Save ();
 	}
 }

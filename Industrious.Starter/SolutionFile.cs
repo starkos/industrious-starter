@@ -11,7 +11,7 @@ public class SolutionFile : TextFile
 
 	public SolutionFile AddProject (String projectPath, String identifier)
 	{
-		var projectName = Path.GetFileNameWithoutExtension (projectPath);
+		var projectName = System.IO.Path.GetFileNameWithoutExtension (projectPath);
 		projectPath = projectPath.Replace ("/", "\\");
 
 		InsertBeforeLast ("^Global", String.Join ("\r\n",

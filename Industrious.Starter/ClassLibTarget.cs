@@ -2,22 +2,28 @@ namespace Industrious.Starter;
 
 public class ClassLibTarget
 {
+	private readonly TextFile _project;
+
+
 	public ClassLibTarget (String name)
 	{
-		var projectFolder = $"Code/{name}";
-		ProjectPath = $"{projectFolder}/{name}.csproj";
+		Path = $"Code/{name}/{name}.csproj";
 
-		Project = new TextFile (ProjectPath);
+		_project = new TextFile (Path);
 	}
 
 
-	public String ProjectPath { get; }
+	public String Path { get; }
 
-	public TextFile Project { get; }
+
+	public void LoadFromResources ()
+	{
+		_project.LoadFromResource ("Core/Project");
+	}
 
 
 	public void Save ()
 	{
-		Project.Save ();
+		_project.Save ();
 	}
 }
