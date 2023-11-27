@@ -2,7 +2,6 @@ namespace Industrious.Starter;
 
 public class MacOsProject
 {
-	private readonly TextFile _project;
 	private readonly TextFile _appDelegate;
 	private readonly TextFile _entitlements;
 	private readonly TextFile _infoPlist;
@@ -14,37 +13,34 @@ public class MacOsProject
 
 	public MacOsProject (String name)
 	{
-		var projectFolder = $"Code/{name}";
-		Path = $"{projectFolder}/{name}.csproj";
-
-		_project = new TextFile (Path);
-		_appDelegate = new TextFile ($"{projectFolder}/AppDelegate.cs");
-		_entitlements = new TextFile ($"{projectFolder}/Entitlements.plist");
-		_infoPlist = new TextFile ($"{projectFolder}/Info.plist");
-		_main = new TextFile ($"{projectFolder}/Main.cs");
-		_storyboard = new TextFile ($"{projectFolder}/Main.storyboard");
-		_windowController = new TextFile ($"{projectFolder}/MainWindowController.cs");
+		Project = new TextFile ($"Code/{name}/{name}.csproj");
+		_appDelegate = new TextFile ($"Code/{name}/AppDelegate.cs");
+		_entitlements = new TextFile ($"Code/{name}/Entitlements.plist");
+		_infoPlist = new TextFile ($"Code/{name}/Info.plist");
+		_main = new TextFile ($"Code/{name}/Main.cs");
+		_storyboard = new TextFile ($"Code/{name}/Main.storyboard");
+		_windowController = new TextFile ($"Code/{name}/MainWindowController.cs");
 
 		_assets = new[] {
-			new BinaryFile ($"{projectFolder}/Assets.xcassets/Contents.json"),
-			new BinaryFile ($"{projectFolder}/Assets.xcassets/AppIcon.appiconset/Contents.json"),
-			new BinaryFile ($"{projectFolder}/Assets.xcassets/AppIcon.appiconset/Icon16.png"),
-			new BinaryFile ($"{projectFolder}/Assets.xcassets/AppIcon.appiconset/Icon32.png"),
-			new BinaryFile ($"{projectFolder}/Assets.xcassets/AppIcon.appiconset/Icon64.png"),
-			new BinaryFile ($"{projectFolder}/Assets.xcassets/AppIcon.appiconset/Icon128.png"),
-			new BinaryFile ($"{projectFolder}/Assets.xcassets/AppIcon.appiconset/Icon256.png"),
-			new BinaryFile ($"{projectFolder}/Assets.xcassets/AppIcon.appiconset/Icon512.png"),
-			new BinaryFile ($"{projectFolder}/Assets.xcassets/AppIcon.appiconset/Icon1024.png"),
+			new BinaryFile ($"Code/{name}/Assets.xcassets/Contents.json"),
+			new BinaryFile ($"Code/{name}/Assets.xcassets/AppIcon.appiconset/Contents.json"),
+			new BinaryFile ($"Code/{name}/Assets.xcassets/AppIcon.appiconset/Icon16.png"),
+			new BinaryFile ($"Code/{name}/Assets.xcassets/AppIcon.appiconset/Icon32.png"),
+			new BinaryFile ($"Code/{name}/Assets.xcassets/AppIcon.appiconset/Icon64.png"),
+			new BinaryFile ($"Code/{name}/Assets.xcassets/AppIcon.appiconset/Icon128.png"),
+			new BinaryFile ($"Code/{name}/Assets.xcassets/AppIcon.appiconset/Icon256.png"),
+			new BinaryFile ($"Code/{name}/Assets.xcassets/AppIcon.appiconset/Icon512.png"),
+			new BinaryFile ($"Code/{name}/Assets.xcassets/AppIcon.appiconset/Icon1024.png")
 		};
 	}
 
 
-	public String Path { get; }
+	public readonly TextFile Project;
 
 
 	public void LoadFromResources (Workspace wks)
 	{
-		_project.LoadFromResource ("macOS/Project")
+		Project.LoadFromResource ("macOS/Project")
 			.Replace ("{Name}", wks.Name)
 			.Replace ("{Title}", wks.ApplicationTitle)
 			.Replace ("{Company}", wks.CompanyName);
@@ -71,7 +67,7 @@ public class MacOsProject
 			.Replace ("{Name}", wks.Name)
 			.Replace ("{Title}", wks.ApplicationTitle);
 
-		var projectFolder = System.IO.Path.GetDirectoryName (Path)!;
+		var projectFolder = Path.GetDirectoryName (Project.Path)!;
 		foreach (var asset in _assets)
 		{
 			var resourcePath = asset.Path.AsSpan (projectFolder.Length);
@@ -82,7 +78,7 @@ public class MacOsProject
 
 	public void Save ()
 	{
-		_project.Save ();
+		Project.Save ();
 		_appDelegate.Save ();
 		_entitlements.Save ();
 		_infoPlist.Save ();

@@ -73,7 +73,7 @@ public static class Updates
 	{
 		Console.WriteLine ("Creating macOS project");
 		wks.MacOs.LoadFromResources (wks);
-		wks.Solution.AddProject (wks.MacOs.Path, "{40B768D8-DCF3-4353-A813-089E779F2E0E}");
+		wks.Solution.AddProject (wks.MacOs.Project.Path, "{40B768D8-DCF3-4353-A813-089E779F2E0E}");
 	}
 
 
@@ -81,6 +81,6 @@ public static class Updates
 	{
 		Console.WriteLine ("Creating console executable project");
 		wks.Console.LoadFromResources (wks);
-		wks.Solution.AddProject (wks.Console.Path, "{548B54F6-AF78-4582-A875-75BE2F0BBA07}");
+		wks.Solution.AddProject (wks.Console.Project.Path, "{548B54F6-AF78-4582-A875-75BE2F0BBA07}");
 	}
 }
