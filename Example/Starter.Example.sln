@@ -12,7 +12,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Support Files", "Support Fi
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starter.Example.Core", "Code\Starter.Example.Core\Starter.Example.Core.csproj", "{E4DCEF92-4272-4329-B946-6BA46249C619}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starter.Example", "Code\Starter.Example\Starter.Example.csproj", "{E4DCEF92-4272-4329-B946-6BA46249C619}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starter.Example.Tests", "Code\Starter.Example.Tests\Starter.Example.Tests.csproj", "{95FE6095-9FC7-4802-987F-A59B06346BB1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starter.Example.macOS", "Code\Starter.Example.macOS\Starter.Example.macOS.csproj", "{40B768D8-DCF3-4353-A813-089E779F2E0E}"
 EndProject
@@ -31,6 +33,10 @@ Global
 		{E4DCEF92-4272-4329-B946-6BA46249C619}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4DCEF92-4272-4329-B946-6BA46249C619}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4DCEF92-4272-4329-B946-6BA46249C619}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95FE6095-9FC7-4802-987F-A59B06346BB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95FE6095-9FC7-4802-987F-A59B06346BB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95FE6095-9FC7-4802-987F-A59B06346BB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95FE6095-9FC7-4802-987F-A59B06346BB1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{40B768D8-DCF3-4353-A813-089E779F2E0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{40B768D8-DCF3-4353-A813-089E779F2E0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40B768D8-DCF3-4353-A813-089E779F2E0E}.Release|Any CPU.ActiveCfg = Release|Any CPU

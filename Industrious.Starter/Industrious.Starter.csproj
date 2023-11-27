@@ -12,15 +12,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<EmbeddedResource Include="Resources\ClassLib\TestProject" />
 		<EmbeddedResource Include="Resources\editorconfig" />
 		<EmbeddedResource Include="Resources\gitattributes" />
 		<EmbeddedResource Include="Resources\gitignore" />
-		<EmbeddedResource Include="Resources\LICENSE.txt"/>
-		<EmbeddedResource Include="Resources\README.md"/>
+		<EmbeddedResource Include="Resources\LICENSE.txt" />
+		<EmbeddedResource Include="Resources\README.md" />
 		<EmbeddedResource Include="Resources\Solution" />
+		<EmbeddedResource Include="Resources\ClassLib\Class1" />
+		<EmbeddedResource Include="Resources\ClassLib\Tests" />
 		<EmbeddedResource Include="Resources\Console\Program" />
 		<EmbeddedResource Include="Resources\Console\Project" />
-		<EmbeddedResource Include="Resources\Core\Project" />
+		<EmbeddedResource Include="Resources\ClassLib\Project" />
 		<EmbeddedResource Include="Resources\macOS\AppDelegate" />
 		<EmbeddedResource Include="Resources\macOS\Entitlements.plist" />
 		<EmbeddedResource Include="Resources\macOS\Info.plist" />
@@ -38,5 +41,6 @@
 		<EmbeddedResource Include="Resources\macOS\Assets.xcassets\AppIcon.appiconset\Icon512.png" />
 		<EmbeddedResource Include="Resources\macOS\Assets.xcassets\AppIcon.appiconset\Icon1024.png" />
 	</ItemGroup>
+
 
 </Project>

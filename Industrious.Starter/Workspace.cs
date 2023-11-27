@@ -18,7 +18,7 @@ public class Workspace
 
 		Solution = new Solution (name);
 
-		Core = new ClassLibraryProject ($"{name}.Core");
+		Common = new ClassLibraryProject ($"{name}");
 
 		Console = new ConsoleProject ($"{name}.Console");
 		MacOs = new MacOsProject ($"{name}.macOS");
@@ -39,7 +39,7 @@ public class Workspace
 
 	public Solution Solution { get; }
 
-	public ClassLibraryProject Core { get; }
+	public ClassLibraryProject Common { get; }
 
 	public ConsoleProject Console { get; }
 	public MacOsProject MacOs { get; }
@@ -48,7 +48,7 @@ public class Workspace
 	public static Workspace? Load (String settingsFileName)
 	{
 		var cfg = Configuration.Load (settingsFileName);
-		return (cfg != null)
+		return cfg != null
 			? new Workspace (cfg.Name, cfg.Title, cfg.Company, cfg.Identifier, cfg.Version)
 			: null;
 	}
@@ -65,7 +65,7 @@ public class Workspace
 		Solution.Save ();
 
 		Console.Save ();
-		Core.Save ();
+		Common.Save ();
 		MacOs.Save ();
 
 		var configuration = new Configuration (this);

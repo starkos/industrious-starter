@@ -2,7 +2,7 @@ namespace Industrious.Starter;
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 /// <summary>
-///   The set of updates that make up a fully configuration Industrious solution.
+///     The set of updates that make up a fully configuration Industrious solution.
 /// </summary>
 ///////////////////////////////////////////////////////////////////////////////////////////
 public static class Updates
@@ -61,8 +61,11 @@ public static class Updates
 	private static void CreateCoreLibraryProject (Workspace wks)
 	{
 		Console.WriteLine ("Creating core library project");
-		wks.Core.LoadFromResources ();
-		wks.Solution.AddProject (wks.Core.Path, "{E4DCEF92-4272-4329-B946-6BA46249C619}");
+
+		wks.Common.LoadFromResources ();
+
+		wks.Solution.AddProject (wks.Common.Project.Path, "{E4DCEF92-4272-4329-B946-6BA46249C619}");
+		wks.Solution.AddProject (wks.Common.TestProject.Path, "{95FE6095-9FC7-4802-987F-A59B06346BB1}");
 	}
 
 
