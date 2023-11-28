@@ -9,20 +9,20 @@ namespace Industrious.Starter;
 ///////////////////////////////////////////////////////////////////////////////////////////
 public class Configuration
 {
-	public Configuration (Workspace workspace)
+	public Configuration (String name, String title, String company, String identifier, Int32 version = 0)
 	{
-		Name = workspace.Name;
-		Title = workspace.ApplicationTitle;
-		Company = workspace.CompanyName;
-		Identifier = workspace.CompanyIdentifier;
-		Version = workspace.CurrentVersion;
+		Name = name;
+		Title = title;
+		Company = company;
+		Identifier = identifier;
+		Version = version;
 	}
 
-	public String Name { get; set; }
-	public String Title { get; set; }
-	public String Company { get; set; }
-	public String Identifier { get; set; }
-	public Int32 Version { get; set; }
+	public String Name { get; }
+	public String Title { get; }
+	public String Company { get; }
+	public String Identifier { get; }
+	public Int32 Version { get; }
 
 
 	public static Configuration? Load (String fileName)
@@ -44,5 +44,11 @@ public class Configuration
 		var options = new JsonSerializerOptions { WriteIndented = true };
 		var json = JsonSerializer.Serialize (this, options);
 		File.WriteAllText (fileName, json);
+	}
+
+
+	public Configuration WithVersion (Int32 version)
+	{
+		return new Configuration (Name, Title, Company, Identifier, version);
 	}
 }

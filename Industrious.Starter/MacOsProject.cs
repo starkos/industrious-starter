@@ -1,6 +1,6 @@
 namespace Industrious.Starter;
 
-public class MacOsProject
+public class MacOsProject : ISaveable
 {
 	private readonly TextFile _appDelegate;
 	private readonly TextFile _entitlements;
@@ -38,34 +38,34 @@ public class MacOsProject
 	public readonly ProjectFile Project;
 
 
-	public void LoadFromResources (Workspace wks)
+	public void Init (Configuration cfg)
 	{
 		Project.LoadFromResource ("macOS/Project")
-			.Replace ("{Name}", wks.Name)
-			.Replace ("{Title}", wks.ApplicationTitle)
-			.Replace ("{Company}", wks.CompanyName);
+			.Replace ("{Name}", cfg.Name)
+			.Replace ("{Title}", cfg.Title)
+			.Replace ("{Company}", cfg.Company);
 
 		_appDelegate.LoadFromResource ("macOS/AppDelegate")
-			.Replace ("{Name}", wks.Name);
+			.Replace ("{Name}", cfg.Name);
 
 		_entitlements.LoadFromResource ("macOS/Entitlements.plist");
 
 		_infoPlist.LoadFromResource ("macOS/Info.plist")
-			.Replace ("{Name}", wks.Name)
-			.Replace ("{Title}", wks.ApplicationTitle)
-			.Replace ("{Company}", wks.CompanyName)
-			.Replace ("{Identifier}", wks.CompanyIdentifier)
+			.Replace ("{Name}", cfg.Name)
+			.Replace ("{Title}", cfg.Title)
+			.Replace ("{Company}", cfg.Company)
+			.Replace ("{Identifier}", cfg.Identifier)
 			.Replace ("{Year}", DateTime.Now.Year.ToString ());
 
 		_main.LoadFromResource ("macOS/Main")
-			.Replace ("{Name}", wks.Name);
+			.Replace ("{Name}", cfg.Name);
 
 		_storyboard.LoadFromResource ("macOS/Main.storyboard")
-			.Replace ("{Title}", wks.ApplicationTitle);
+			.Replace ("{Title}", cfg.Title);
 
 		_windowController.LoadFromResource ("macOS/MainWindowController")
-			.Replace ("{Name}", wks.Name)
-			.Replace ("{Title}", wks.ApplicationTitle);
+			.Replace ("{Name}", cfg.Name)
+			.Replace ("{Title}", cfg.Title);
 
 		var projectFolder = Path.GetDirectoryName (Project.Path)!;
 		foreach (var asset in _assets)

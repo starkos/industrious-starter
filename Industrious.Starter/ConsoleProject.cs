@@ -1,6 +1,6 @@
 namespace Industrious.Starter;
 
-public class ConsoleProject
+public class ConsoleProject : ISaveable
 {
 	private readonly TextFile _program;
 
@@ -15,12 +15,12 @@ public class ConsoleProject
 	public ProjectFile Project { get; }
 
 
-	public void LoadFromResources (Workspace wks)
+	public void Init (Configuration cfg)
 	{
 		Project.LoadFromResource ("Console/Project")
-			.Replace ("{Name}", wks.Name)
-			.Replace ("{Title}", wks.ApplicationTitle)
-			.Replace ("{Company}", wks.CompanyName);
+			.Replace ("{Name}", cfg.Name)
+			.Replace ("{Title}", cfg.Title)
+			.Replace ("{Company}", cfg.Company);
 
 		_program.LoadFromResource ("Console/Program");
 	}

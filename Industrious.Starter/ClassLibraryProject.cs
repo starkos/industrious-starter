@@ -1,9 +1,10 @@
 namespace Industrious.Starter;
 
-public class ClassLibraryProject
+public class ClassLibraryProject : ISaveable
 {
 	private readonly String _name;
 	private readonly TextFile _class1;
+
 	private readonly TextFile _tests;
 	private readonly TextFile _usings;
 
@@ -25,7 +26,7 @@ public class ClassLibraryProject
 	public ProjectFile TestProject { get; }
 
 
-	public void LoadFromResources ()
+	public void Init ()
 	{
 		Project.LoadFromResource ("ClassLib/Project");
 

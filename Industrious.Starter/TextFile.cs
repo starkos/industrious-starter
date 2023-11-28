@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace Industrious.Starter;
 
-public class TextFile
+public class TextFile : ISaveable
 {
 	private readonly Encoding _encoding;
 	private String? _contents;
@@ -30,7 +30,7 @@ public class TextFile
 	}
 
 
-	protected TextFile InsertBeforeLast (String pattern, String value)
+	public TextFile InsertBeforeLast (String pattern, String value)
 	{
 		var matches = Regex.Matches (Contents, pattern, Options (pattern));
 		var insertAtIndex = matches.Last ().Groups[0].Index;

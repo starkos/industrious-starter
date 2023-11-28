@@ -6,70 +6,47 @@ internal class Program : ICommandLineHandler
 	private const String ConfigFileName = ".starter.json";
 
 
-	///////////////////////////////////////////////////////////////////////////////////
-	/// <summary>
-	///   Program entry point.
-	/// </summary>
-	///////////////////////////////////////////////////////////////////////////////////
-
 	public static Int32 Main (String[] args)
 	{
+		// Process the command line; calls one of the `On...` methods below
 		var program = new Program ();
 		var parser = new CommandLineParser (program);
 		return parser.Parse (args);
 	}
 
-	///////////////////////////////////////////////////////////////////////////////////
-	/// <summary>
-	///   Generate a new solution.
-	/// </summary>
-	/// <param name="name">
-	///   A name for the new solution.
-	/// </param>
-	/// <param name="applicationTitle">
-	///   An optional application title.
-	/// </param>
-	/// <param name="companyName">
-	///    A company name, to use in templates where applicable.
-	/// </param>
-	/// <param name="companyIdentifier">
-	///    A company identifier, to use in templates where applicable.
-	/// </param>
-	///////////////////////////////////////////////////////////////////////////////////
 
-	public void OnNewSolution (String name, String? applicationTitle, String companyName, String companyIdentifier)
+	public void OnNewSolution (String name, String? title, String company, String identifier)
 	{
-		var workspace = new Workspace (name, applicationTitle ?? name, companyName, companyIdentifier);
-		workspace.CurrentVersion = Updates.Apply (workspace);
-		workspace.Save (ConfigFileName);
+		var configuration = new Configuration (name, title ?? name, company, identifier);
+
+		var builder = new SolutionBuilder (configuration);
+		var updatedConfiguration = builder.ApplyUpdates ();
+
+		updatedConfiguration.Save (ConfigFileName);
 		Console.WriteLine ("Done");
 	}
 
 
-	///////////////////////////////////////////////////////////////////////////////////
-	/// <summary>
-	///   Update an existing solution.
-	/// </summary>
-	///////////////////////////////////////////////////////////////////////////////////
-
 	public void OnUpdateSolution ()
 	{
-		var workspace = Workspace.Load (ConfigFileName);
-		if (workspace == null)
+		var configuration = Configuration.Load (ConfigFileName);
+		if (configuration == null)
 		{
 			Console.WriteLine ($"Error: `{ConfigFileName}` not found");
 			Environment.Exit (1);
 		}
 
-		if (workspace.CurrentVersion < Updates.LatestVersion)
+		var builder = new SolutionBuilder (configuration);
+		var updatedConfiguration = builder.ApplyUpdates ();
+
+		if (configuration.Version == updatedConfiguration.Version)
 		{
-			workspace.CurrentVersion = Updates.Apply (workspace);
-			workspace.Save (ConfigFileName);
-			Console.WriteLine ("Done");
+			Console.WriteLine ("Solution is up to date.");
 		}
 		else
 		{
-			Console.WriteLine ("Workspace is up to date.");
+			updatedConfiguration.Save (ConfigFileName);
+			Console.WriteLine ("Done");
 		}
 	}
 }
