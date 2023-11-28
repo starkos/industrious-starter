@@ -11,22 +11,24 @@ public class ClassLibraryProject
 	{
 		_name = name;
 
-		Project = new TextFile ($"Code/{name}/{name}.csproj");
+		Project = new ProjectFile ($"Code/{name}/{name}.csproj");
 		_class1 = new TextFile ($"Code/{name}/Class1.cs");
 
-		TestProject = new TextFile ($"Code/{name}.Tests/{name}.Tests.csproj");
+		TestProject = new ProjectFile ($"Code/{name}.Tests/{name}.Tests.csproj");
 		_tests = new TextFile ($"Code/{name}.Tests/Class1Tests.cs");
 	}
 
 
-	public TextFile Project { get; }
-	public TextFile TestProject { get; }
+	public ProjectFile Project { get; }
+	public ProjectFile TestProject { get; }
 
 
 	public void LoadFromResources ()
 	{
 		Project.LoadFromResource ("ClassLib/Project");
+
 		TestProject.LoadFromResource ("ClassLib/TestProject");
+		TestProject.AddLocalProjectReference (Project);
 
 		_class1.LoadFromResource ("ClassLib/Class1")
 			.Replace ("{Name}", _name);

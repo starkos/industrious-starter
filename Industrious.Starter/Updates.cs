@@ -10,9 +10,9 @@ public static class Updates
 	private static readonly Action<Workspace>[] Versions = {
 		CreateEmptySolution,
 		CreateTopLevelSupportFiles,
-		CreateCoreLibraryProject,
-		CreateMacOsProject,
-		CreateConsoleExecutableProject
+		CreateCommonCodeLibrary,
+		CreateConsoleExecutableProject,
+		CreateMacOsProject
 	};
 
 
@@ -30,7 +30,7 @@ public static class Updates
 	private static void CreateEmptySolution (Workspace wks)
 	{
 		Console.WriteLine ("Creating solution");
-		wks.Solution.LoadFromResource ("Solution");
+		wks.SolutionFile.LoadFromResource ("Solution");
 	}
 
 
@@ -49,7 +49,7 @@ public static class Updates
 		wks.Readme.LoadFromResource ("README.md")
 			.Replace ("{Name}", wks.Name);
 
-		wks.Solution
+		wks.SolutionFile
 			.AddSolutionItem (".editorconfig")
 			.AddSolutionItem (".gitattributes")
 			.AddSolutionItem (".gitignore")
@@ -58,29 +58,35 @@ public static class Updates
 	}
 
 
-	private static void CreateCoreLibraryProject (Workspace wks)
+	private static void CreateCommonCodeLibrary (Workspace wks)
 	{
-		Console.WriteLine ("Creating core library project");
+		Console.WriteLine ("Creating common code library");
 
 		wks.Common.LoadFromResources ();
 
-		wks.Solution.AddProject (wks.Common.Project.Path, "{E4DCEF92-4272-4329-B946-6BA46249C619}");
-		wks.Solution.AddProject (wks.Common.TestProject.Path, "{95FE6095-9FC7-4802-987F-A59B06346BB1}");
-	}
-
-
-	private static void CreateMacOsProject (Workspace wks)
-	{
-		Console.WriteLine ("Creating macOS project");
-		wks.MacOs.LoadFromResources (wks);
-		wks.Solution.AddProject (wks.MacOs.Project.Path, "{40B768D8-DCF3-4353-A813-089E779F2E0E}");
+		wks.SolutionFile.AddProject (wks.Common.Project.Path, "{E4DCEF92-4272-4329-B946-6BA46249C619}");
+		wks.SolutionFile.AddProject (wks.Common.TestProject.Path, "{95FE6095-9FC7-4802-987F-A59B06346BB1}");
 	}
 
 
 	private static void CreateConsoleExecutableProject (Workspace wks)
 	{
 		Console.WriteLine ("Creating console executable project");
+
 		wks.Console.LoadFromResources (wks);
-		wks.Solution.AddProject (wks.Console.Project.Path, "{548B54F6-AF78-4582-A875-75BE2F0BBA07}");
+		wks.Console.Project.AddLocalProjectReference (wks.Common.Project);
+
+		wks.SolutionFile.AddProject (wks.Console.Project.Path, "{548B54F6-AF78-4582-A875-75BE2F0BBA07}");
+	}
+
+
+	private static void CreateMacOsProject (Workspace wks)
+	{
+		Console.WriteLine ("Creating macOS project");
+
+		wks.MacOs.LoadFromResources (wks);
+		wks.MacOs.Project.AddLocalProjectReference (wks.Common.Project);
+
+		wks.SolutionFile.AddProject (wks.MacOs.Project.Path, "{40B768D8-DCF3-4353-A813-089E779F2E0E}");
 	}
 }

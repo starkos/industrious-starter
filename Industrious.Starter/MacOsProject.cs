@@ -13,7 +13,7 @@ public class MacOsProject
 
 	public MacOsProject (String name)
 	{
-		Project = new TextFile ($"Code/{name}/{name}.csproj");
+		Project = new ProjectFile ($"Code/{name}/{name}.csproj");
 		_appDelegate = new TextFile ($"Code/{name}/AppDelegate.cs");
 		_entitlements = new TextFile ($"Code/{name}/Entitlements.plist");
 		_infoPlist = new TextFile ($"Code/{name}/Info.plist");
@@ -35,7 +35,7 @@ public class MacOsProject
 	}
 
 
-	public readonly TextFile Project;
+	public readonly ProjectFile Project;
 
 
 	public void LoadFromResources (Workspace wks)

@@ -16,7 +16,7 @@ public class Workspace
 		License = new TextFile ("LICENSE.txt");
 		Readme = new TextFile ("README.md");
 
-		Solution = new Solution (name);
+		SolutionFile = new SolutionFile (name);
 
 		Common = new ClassLibraryProject ($"{name}");
 
@@ -37,7 +37,7 @@ public class Workspace
 	public TextFile License { get; }
 	public TextFile Readme { get; }
 
-	public Solution Solution { get; }
+	public SolutionFile SolutionFile { get; }
 
 	public ClassLibraryProject Common { get; }
 
@@ -62,7 +62,7 @@ public class Workspace
 		License.Save ();
 		Readme.Save ();
 
-		Solution.Save ();
+		SolutionFile.Save ();
 
 		Console.Save ();
 		Common.Save ();

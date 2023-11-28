@@ -10,6 +10,6 @@
     <Product>Starter.Example</Product>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Starter.Example.Core\Starter.Example.Core.csproj" />
+    <ProjectReference Include="..\Starter.Example\Starter.Example.csproj" />
   </ItemGroup>
 </Project>

@@ -7,12 +7,12 @@ public class ConsoleProject
 
 	public ConsoleProject (String name)
 	{
-		Project = new TextFile ($"Code/{name}/{name}.csproj");
+		Project = new ProjectFile ($"Code/{name}/{name}.csproj");
 		_program = new TextFile ($"Code/{name}/Program.cs");
 	}
 
 
-	public TextFile Project { get; }
+	public ProjectFile Project { get; }
 
 
 	public void LoadFromResources (Workspace wks)
