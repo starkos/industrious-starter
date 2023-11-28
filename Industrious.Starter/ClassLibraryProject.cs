@@ -5,6 +5,7 @@ public class ClassLibraryProject
 	private readonly String _name;
 	private readonly TextFile _class1;
 	private readonly TextFile _tests;
+	private readonly TextFile _usings;
 
 
 	public ClassLibraryProject (String name)
@@ -16,6 +17,7 @@ public class ClassLibraryProject
 
 		TestProject = new ProjectFile ($"Code/{name}.Tests/{name}.Tests.csproj");
 		_tests = new TextFile ($"Code/{name}.Tests/Class1Tests.cs");
+		_usings = new TextFile ($"Code/{name}.Tests/Usings.cs");
 	}
 
 
@@ -35,6 +37,8 @@ public class ClassLibraryProject
 
 		_tests.LoadFromResource ("ClassLib/Tests")
 			.Replace ("{Name}", _name);
+
+		_usings.LoadFromResource ("ClassLib/Usings");
 	}
 
 
@@ -45,5 +49,6 @@ public class ClassLibraryProject
 
 		TestProject.Save ();
 		_tests.Save ();
+		_usings.Save ();
 	}
 }

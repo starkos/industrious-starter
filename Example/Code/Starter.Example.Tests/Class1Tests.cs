@@ -1,4 +1,4 @@
-namespace Starter.Example;
+namespace Starter.Example.Tests;
 
 public class UnitTest1
 {
