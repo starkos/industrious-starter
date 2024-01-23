@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net7.0-ios</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>true</ImplicitUsings>
+    <SupportedOSPlatformVersion>13.0</SupportedOSPlatformVersion>
+    <RootNamespace>{Name}</RootNamespace>
+    <AssemblyName>{Title}</AssemblyName>
+    <Company>{Company}</Company>
+    <Product>{Name}</Product>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <CodesignKey>iPhone Developer</CodesignKey>
+  </PropertyGroup>
+</Project>

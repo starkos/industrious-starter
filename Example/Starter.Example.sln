@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Support Files", "Support Files", "{6B0FD701-B9D2-44C1-BD08-C9E8AE7318DE}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		LICENSE.txt = LICENSE.txt
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starter.Example.Common", "Code\Starter.Example.Common\Starter.Example.Common.csproj", "{E4DCEF92-4272-4329-B946-6BA46249C619}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starter.Example.Common.Tests", "Code\Starter.Example.Common.Tests\Starter.Example.Common.Tests.csproj", "{95FE6095-9FC7-4802-987F-A59B06346BB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starter.Example.Console", "Code\Starter.Example.Console\Starter.Example.Console.csproj", "{548B54F6-AF78-4582-A875-75BE2F0BBA07}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starter.Example.macOS", "Code\Starter.Example.macOS\Starter.Example.macOS.csproj", "{40B768D8-DCF3-4353-A813-089E779F2E0E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starter.Example.iOS", "Code\Starter.Example.iOS\Starter.Example.iOS.csproj", "{3006724E-A8E3-4411-BF05-BB6432A88424}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E4DCEF92-4272-4329-B946-6BA46249C619}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4DCEF92-4272-4329-B946-6BA46249C619}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4DCEF92-4272-4329-B946-6BA46249C619}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4DCEF92-4272-4329-B946-6BA46249C619}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95FE6095-9FC7-4802-987F-A59B06346BB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95FE6095-9FC7-4802-987F-A59B06346BB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95FE6095-9FC7-4802-987F-A59B06346BB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95FE6095-9FC7-4802-987F-A59B06346BB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{548B54F6-AF78-4582-A875-75BE2F0BBA07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{548B54F6-AF78-4582-A875-75BE2F0BBA07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{548B54F6-AF78-4582-A875-75BE2F0BBA07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{548B54F6-AF78-4582-A875-75BE2F0BBA07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40B768D8-DCF3-4353-A813-089E779F2E0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40B768D8-DCF3-4353-A813-089E779F2E0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40B768D8-DCF3-4353-A813-089E779F2E0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40B768D8-DCF3-4353-A813-089E779F2E0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3006724E-A8E3-4411-BF05-BB6432A88424}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3006724E-A8E3-4411-BF05-BB6432A88424}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3006724E-A8E3-4411-BF05-BB6432A88424}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3006724E-A8E3-4411-BF05-BB6432A88424}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,91 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1"/>
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\ClassLib\TestProject"/>
+		<EmbeddedResource Include="Resources\editorconfig"/>
+		<EmbeddedResource Include="Resources\gitattributes"/>
+		<EmbeddedResource Include="Resources\gitignore"/>
+		<EmbeddedResource Include="Resources\LICENSE.txt"/>
+		<EmbeddedResource Include="Resources\README.md"/>
+		<EmbeddedResource Include="Resources\Solution"/>
+		<EmbeddedResource Include="Resources\ClassLib\Class1"/>
+		<EmbeddedResource Include="Resources\ClassLib\Tests"/>
+		<EmbeddedResource Include="Resources\Console\Program"/>
+		<EmbeddedResource Include="Resources\Console\Project"/>
+		<EmbeddedResource Include="Resources\ClassLib\Project"/>
+		<EmbeddedResource Include="Resources\ClassLib\Usings"/>
+		<EmbeddedResource Include="Resources\macOS\AppDelegate"/>
+		<EmbeddedResource Include="Resources\macOS\Entitlements.plist"/>
+		<EmbeddedResource Include="Resources\macOS\Info.plist"/>
+		<EmbeddedResource Include="Resources\macOS\Main"/>
+		<EmbeddedResource Include="Resources\macOS\Main.storyboard"/>
+		<EmbeddedResource Include="Resources\macOS\MainWindowController"/>
+		<EmbeddedResource Include="Resources\macOS\Project"/>
+		<EmbeddedResource Include="Resources\macOS\Assets.xcassets\Contents.json"/>
+		<EmbeddedResource Include="Resources\macOS\Assets.xcassets\AppIcon.appiconset\Contents.json"/>
+		<EmbeddedResource Include="Resources\macOS\Assets.xcassets\AppIcon.appiconset\Icon16.png"/>
+		<EmbeddedResource Include="Resources\macOS\Assets.xcassets\AppIcon.appiconset\Icon32.png"/>
+		<EmbeddedResource Include="Resources\macOS\Assets.xcassets\AppIcon.appiconset\Icon64.png"/>
+		<EmbeddedResource Include="Resources\macOS\Assets.xcassets\AppIcon.appiconset\Icon128.png"/>
+		<EmbeddedResource Include="Resources\macOS\Assets.xcassets\AppIcon.appiconset\Icon256.png"/>
+		<EmbeddedResource Include="Resources\macOS\Assets.xcassets\AppIcon.appiconset\Icon512.png"/>
+		<EmbeddedResource Include="Resources\macOS\Assets.xcassets\AppIcon.appiconset\Icon1024.png"/>
+		<None Remove="Resources\iOS\Assets.xcassets\AppIcon.appiconset\Contents.json"/>
+		<EmbeddedResource Include="Resources\iOS\Assets.xcassets\AppIcon.appiconset\Contents.json"/>
+		<None Remove="Resources\iOS\Assets.xcassets\AppIcon.appiconset\Icon20.png"/>
+		<EmbeddedResource Include="Resources\iOS\Assets.xcassets\AppIcon.appiconset\Icon20.png"/>
+		<None Remove="Resources\iOS\Assets.xcassets\AppIcon.appiconset\Icon29.png"/>
+		<EmbeddedResource Include="Resources\iOS\Assets.xcassets\AppIcon.appiconset\Icon29.png"/>
+		<None Remove="Resources\iOS\Assets.xcassets\AppIcon.appiconset\Icon40.png"/>
+		<EmbeddedResource Include="Resources\iOS\Assets.xcassets\AppIcon.appiconset\Icon40.png"/>
+		<None Remove="Resources\iOS\Assets.xcassets\AppIcon.appiconset\Icon58.png"/>
+		<EmbeddedResource Include="Resources\iOS\Assets.xcassets\AppIcon.appiconset\Icon58.png"/>
+		<None Remove="Resources\iOS\Assets.xcassets\AppIcon.appiconset\Icon60.png"/>
+		<EmbeddedResource Include="Resources\iOS\Assets.xcassets\AppIcon.appiconset\Icon60.png"/>
+		<None Remove="Resources\iOS\Assets.xcassets\AppIcon.appiconset\Icon76.png"/>
+		<EmbeddedResource Include="Resources\iOS\Assets.xcassets\AppIcon.appiconset\Icon76.png"/>
+		<None Remove="Resources\iOS\Assets.xcassets\AppIcon.appiconset\Icon80.png"/>
+		<EmbeddedResource Include="Resources\iOS\Assets.xcassets\AppIcon.appiconset\Icon80.png"/>
+		<None Remove="Resources\iOS\Assets.xcassets\AppIcon.appiconset\Icon87.png"/>
+		<EmbeddedResource Include="Resources\iOS\Assets.xcassets\AppIcon.appiconset\Icon87.png"/>
+		<None Remove="Resources\iOS\Assets.xcassets\AppIcon.appiconset\Icon120.png"/>
+		<EmbeddedResource Include="Resources\iOS\Assets.xcassets\AppIcon.appiconset\Icon120.png"/>
+		<None Remove="Resources\iOS\Assets.xcassets\AppIcon.appiconset\Icon152.png"/>
+		<EmbeddedResource Include="Resources\iOS\Assets.xcassets\AppIcon.appiconset\Icon152.png"/>
+		<None Remove="Resources\iOS\Assets.xcassets\AppIcon.appiconset\Icon167.png"/>
+		<EmbeddedResource Include="Resources\iOS\Assets.xcassets\AppIcon.appiconset\Icon167.png"/>
+		<None Remove="Resources\iOS\Assets.xcassets\AppIcon.appiconset\Icon180.png"/>
+		<EmbeddedResource Include="Resources\iOS\Assets.xcassets\AppIcon.appiconset\Icon180.png"/>
+		<None Remove="Resources\iOS\Assets.xcassets\AppIcon.appiconset\Icon1024.png"/>
+		<EmbeddedResource Include="Resources\iOS\Assets.xcassets\AppIcon.appiconset\Icon1024.png"/>
+		<Compile Remove="Resources\iOS\AppDelegate.cs"/>
+		<EmbeddedResource Include="Resources\iOS\AppDelegate"/>
+		<None Remove="Resources\iOS\Entitlements.plist"/>
+		<EmbeddedResource Include="Resources\iOS\Entitlements.plist"/>
+		<None Remove="Resources\iOS\Info.plist"/>
+		<EmbeddedResource Include="Resources\iOS\Info.plist"/>
+		<None Remove="Resources\iOS\Project"/>
+		<EmbeddedResource Include="Resources\iOS\Project"/>
+		<None Remove="Resources\iOS\LaunchScreen.storyboard"/>
+		<EmbeddedResource Include="Resources\iOS\LaunchScreen.storyboard"/>
+		<None Remove="Resources\iOS\Main"/>
+		<EmbeddedResource Include="Resources\iOS\Main"/>
+	</ItemGroup>
+
+
+	<ItemGroup>
+		<Folder Include="Resources\iOS\"/>
+	</ItemGroup>
+
+</Project>

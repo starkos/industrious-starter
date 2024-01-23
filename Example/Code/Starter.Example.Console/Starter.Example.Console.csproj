@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>Starter.Example</RootNamespace>
+    <AssemblyName>Example</AssemblyName>
+    <Company>Industrious One</Company>
+    <Product>Starter.Example</Product>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Starter.Example.Common\Starter.Example.Common.csproj" />
+  </ItemGroup>
+</Project>

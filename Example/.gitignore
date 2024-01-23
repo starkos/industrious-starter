@@ -1,0 +1,9 @@
+# Build files
+[Bb]in/
+[Oo]bj/
+
+# macOS files
+.DS_Store
+
+# JetBrains Rider files
+/.idea/

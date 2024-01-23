@@ -1,0 +1,4 @@
+using {Name};
+
+NSApplication.Init ();
+NSApplication.Main (args);
