@@ -53,6 +53,12 @@ public class Configuration
 	}
 
 
+	public Configuration WithName (String name)
+	{
+		return new Configuration (name, Title, Company, Identifier, Version);
+	}
+
+
 	public Configuration WithVersion (Int32 version)
 	{
 		return new Configuration (Name, Title, Company, Identifier, version);

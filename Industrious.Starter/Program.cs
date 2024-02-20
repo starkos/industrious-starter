@@ -1,4 +1,6 @@
-﻿namespace Industrious.Starter;
+﻿using Industrious.Starter.Commands;
+
+namespace Industrious.Starter;
 
 internal class Program : ICommandLineHandler
 {
@@ -27,14 +29,22 @@ internal class Program : ICommandLineHandler
 	}
 
 
+	public void OnRenameSolution (String newName)
+	{
+		var configuration = LoadConfiguration ();
+
+		var command = new RenameCommand (configuration, newName);
+		command.Apply ();
+
+		configuration.WithName (newName).Save (ConfigFileName);
+
+		Console.WriteLine ("Rename complete; please search for remaining replacements");
+	}
+
+
 	public void OnUpdateSolution ()
 	{
-		var configuration = Configuration.Load (ConfigFileName);
-		if (configuration == null)
-		{
-			Console.WriteLine ($"Error: `{ConfigFileName}` not found");
-			Environment.Exit (1);
-		}
+		var configuration = LoadConfiguration ();
 
 		var builder = new SolutionBuilder (configuration);
 		var updatedConfiguration = builder.ApplyUpdates ();
@@ -48,5 +58,18 @@ internal class Program : ICommandLineHandler
 			updatedConfiguration.Save (ConfigFileName);
 			Console.WriteLine ("Done");
 		}
+	}
+
+
+	private static Configuration LoadConfiguration ()
+	{
+		var configuration = Configuration.Load (ConfigFileName);
+		if (configuration == null)
+		{
+			Console.WriteLine ($"Error: `{ConfigFileName}` not found");
+			Environment.Exit (1);
+		}
+
+		return configuration;
 	}
 }

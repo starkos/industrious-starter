@@ -23,6 +23,15 @@ set a different value.
 $ Industrious.Starter new Starter.Example --title Example
 ```
 
+To rename an existing solution, changing project names, references, and namespaces.
+
+```shell
+$ Industrious.Starter rename NewName
+```
+
+This operation will rename files and fix up projects but intentionally leaves some sources, such as storyboards, alone.
+You will need to search and replace to find those occurrences.
+
 ## // TODO:
 
 - [x] Generate support files (`.editorconfig`, etc.)
@@ -34,3 +43,4 @@ $ Industrious.Starter new Starter.Example --title Example
 - [ ] Generate Windows project
 - [ ] Generate Android project
 - [ ] Generate web project
+- [x] Rename an existing solution

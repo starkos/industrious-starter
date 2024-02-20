@@ -19,20 +19,20 @@ public class CommandLineParser
 		// New solution command
 
 		var nameArgument = new Argument<String> (
-			name: "name",
-			description: "name of the solution to be generated");
+			"name",
+			"name of the solution to be generated");
 
 		var titleOption = new Option<String?> (
-			aliases: new[] { "--title" },
-			description: "application title; defaults to solution name");
+			new[] { "--title" },
+			"application title; defaults to solution name");
 
 		var companyOption = new Option<String> (
-			aliases: new[] { "--company" },
+			new[] { "--company" },
 			description: $@"company name; defaults to {CompanyName}",
 			getDefaultValue: () => CompanyName);
 
 		var identifierOption = new Option<String> (
-			aliases: new[] { "--id" },
+			new[] { "--id" },
 			description: $@"company identifier; defaults to {CompanyId}",
 			getDefaultValue: () => CompanyId);
 
@@ -42,6 +42,20 @@ public class CommandLineParser
 
 		newSolutionCommand.SetHandler (handler.OnNewSolution, nameArgument, titleOption, companyOption, identifierOption);
 		_rootCommand.AddCommand (newSolutionCommand);
+
+		//---------------------------------------------------------------
+		// Rename solution command
+
+		var newNameArgument = new Argument<String> (
+			"name",
+			"the new name of the solution");
+
+		var renameSolutionCommand = new Command ("rename", "Rename the current solution") {
+			newNameArgument
+		};
+
+		renameSolutionCommand.SetHandler (handler.OnRenameSolution, newNameArgument);
+		_rootCommand.AddCommand (renameSolutionCommand);
 
 		//---------------------------------------------------------------
 		// Update solution command
