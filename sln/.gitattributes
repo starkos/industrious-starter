@@ -1,0 +1,26 @@
+*          text=auto
+
+# Visual Studio files
+*.csproj   text eol=crlf
+*.sln      text eol=crlf
+
+# C# files
+*.cs       text diff=csharp
+*.cshtml   text diff=html
+*.csx      text diff=csharp
+
+# Images
+*.png      binary
+*.jpg      binary
+*.jpeg     binary
+*.gif      binary
+*.tif      binary
+*.tiff     binary
+*.ico      binary
+*.svg      text
+
+# Documentation
+*.md       text diff=markdown
+
+# Shell scripts
+*.sh       text eol=lf

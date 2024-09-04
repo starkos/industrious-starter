@@ -1,0 +1,25 @@
+{
+    "name": "Solution (Industrious)",
+    "author": "Jess Perkins",
+    "shortName": "i1sln",
+    "identity": "Industrious.Solution",
+    "classifications": [ "Solution" ],
+    "sourceName": "MySolution",
+    "preferNameDirectory" : "true",
+    "tags": {},
+    "symbols": {
+        "copyrightName": {
+            "type": "parameter",
+            "defaultValue": "Industrious One",
+            "replaces": "<copyright holder>"
+        },
+        "copyrightYear": {
+            "type": "generated",
+            "generator": "now",
+            "replaces": "<year>",
+            "parameters": {
+                "format": "yyyy"
+            }
+        }
+    }
+}
