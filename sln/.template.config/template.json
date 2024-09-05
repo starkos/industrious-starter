@@ -1,25 +1,29 @@
 {
-    "name": "Solution (Industrious)",
-    "author": "Jess Perkins",
-    "shortName": "i1sln",
-    "identity": "Industrious.Solution",
-    "classifications": [ "Solution" ],
-    "sourceName": "MySolution",
-    "preferNameDirectory" : "true",
-    "tags": {},
-    "symbols": {
-        "copyrightName": {
-            "type": "parameter",
-            "defaultValue": "Industrious One",
-            "replaces": "<copyright holder>"
-        },
-        "copyrightYear": {
-            "type": "generated",
-            "generator": "now",
-            "replaces": "<year>",
-            "parameters": {
-                "format": "yyyy"
-            }
-        }
-    }
+	"name": "Solution (Industrious)",
+	"author": "Jess Perkins",
+	"shortName": "i1sln",
+	"identity": "Industrious.Solution",
+	"classifications": [
+		"Solution"
+	],
+	"sourceName": "MySolution",
+	"preferNameDirectory": "true",
+	"tags": {
+		"type": "solution"
+	},
+	"symbols": {
+		"author": {
+			"type": "parameter",
+			"defaultValue": "Industrious One",
+			"replaces": "Industrious One"
+		},
+		"copyrightYear": {
+			"type": "generated",
+			"generator": "now",
+			"replaces": "2024",
+			"parameters": {
+				"format": "yyyy"
+			}
+		}
+	}
 }

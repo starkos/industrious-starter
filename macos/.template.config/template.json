@@ -1,0 +1,73 @@
+{
+    "name": "macOS Application (Industrious)",
+    "shortName": "i1macos",
+    "identity": "Industrious.MacOS",
+    "author": "Jess Perkins",
+    "classifications": [
+        "macOS"
+    ],
+    "sourceName": "MyMacApp.1",
+    "preferNameDirectory": "true",
+    "tags": {
+        "language": "C#",
+        "type": "project"
+    },
+    "symbols": {
+        "author": {
+            "description": "The author's name for copyrrights",
+            "type": "parameter",
+            "defaultValue": "Industrious One",
+            "replaces": "Industrious One"
+        },
+        "authorId": {
+            "description": "The author's reverse domain identifier",
+            "type": "parameter",
+            "defaultValue": "com.industriousone",
+            "replaces": "com.industriousone"
+        },
+        "title": {
+            "description": "The title of the application, if different from project name",
+            "type": "parameter"
+        },
+        "_computedTitle": {
+            "description": "The application title if provided, else the project name",
+            "type": "generated",
+            "generator": "coalesce",
+            "parameters": {
+                "sourceVariableName": "title",
+                "fallbackVariableName": "name"
+            },
+            "replaces": "My Application"
+        },
+        "_computedSafeTitle": {
+            "description": "The safe application title if provided, else the safe project name",
+            "type": "generated",
+            "generator": "coalesce",
+            "parameters": {
+                "sourceVariableName": "_safeTitle",
+                "fallbackVariableName": "_safeName"
+            },
+            "replaces": "MyApplication"
+        },
+        "_copyrightYear": {
+            "type": "generated",
+            "generator": "now",
+            "replaces": "2024",
+            "parameters": {
+                "format": "yyyy"
+            }
+        },
+        "_safeName": {
+            "description": "The name value with unsafe characters removed",
+            "type": "derived",
+            "valueSource": "name",
+            "valueTransform": "safe_namespace"
+        },
+        "_safeTitle": {
+            "description": "The title value with unsafe characters removed",
+            "type": "derived",
+            "valueSource": "title",
+            "valueTransform": "safe_namespace"
+        }
+    }
+}
