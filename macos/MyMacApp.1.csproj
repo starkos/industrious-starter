@@ -1,13 +1,25 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net7.0-macos</TargetFramework>
-    <OutputType>Exe</OutputType>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <SupportedOSPlatformVersion>10.14</SupportedOSPlatformVersion>
-    <RootNamespace>MyMacApp._1</RootNamespace>
-    <AssemblyName>MyApplication</AssemblyName>
-    <Company>Industrious One</Company>
-    <Product>MyMacApp.1</Product>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0-macos</TargetFramework>
+		<OutputType>Exe</OutputType>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<SupportedOSPlatformVersion>10.15</SupportedOSPlatformVersion>
+		<RootNamespace>MyMacApp._1</RootNamespace>
+		<AssemblyName>MyApplication</AssemblyName>
+		<Company>Industrious One</Company>
+		<Product>MyMacApp.1</Product>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+		<EnableCodeSigning>true</EnableCodeSigning>
+		<CodesignKey>Mac Developer</CodesignKey>
+		<CodesignProvision>Automatic</CodesignProvision>
+		<CreatePackage>false</CreatePackage>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+		<EnableCodeSigning>true</EnableCodeSigning>
+		<CodesignKey>Mac Developer</CodesignKey>
+		<CodesignProvision>Automatic</CodesignProvision>
+		<CreatePackage>false</CreatePackage>
+	</PropertyGroup>
 </Project>
